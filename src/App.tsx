@@ -5,7 +5,7 @@ import Login from './pages/static/Login'
 import Register from './pages/static/Register'
 import Layout from './components/Layout'
 import Dashboard from './pages/protected/Dashboard/Dashboard'
-import ProtectedRoutes from './components/ProtectedRoutes'
+// import ProtectedRoutes from './components/ProtectedRoutes'
 
 const App: React.FC = () => {
 

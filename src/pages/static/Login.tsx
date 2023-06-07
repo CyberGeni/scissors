@@ -8,9 +8,9 @@ function Login() {
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    const [errorMessage, setErrorMessage] = useState('hello');
-    const [isEmailValid, setIsEmailValid] = useState(true);
-    const [isPasswordValid, setIsPasswordValid] = useState(true);
+    // const [errorMessage, setErrorMessage] = useState('hello');
+    // const [isEmailValid, setIsEmailValid] = useState(true);
+    // const [isPasswordValid, setIsPasswordValid] = useState(true);
   
     useEffect(() => {
         (async () => {
@@ -48,7 +48,7 @@ function Login() {
             <input type="email" placeholder='email' onChange={(e) => setEmail(e.target.value)} />
             <input type="password" placeholder='password' onChange={(e) => setPassword(e.target.value)} />
                 <button className='p-2 bg-blue-800 text-white'>login</button>
-                <p>{errorMessage}</p>
+                {/* <p>{errorMessage}</p> */}
             </form>
 
         </div>

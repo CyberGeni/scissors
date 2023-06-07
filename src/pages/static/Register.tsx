@@ -8,7 +8,6 @@ function Register() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [errorMessage, setErrorMessage] = useState('');
-    const [successMessage, setSuccessMessage] = useState('');
     const [success, setSuccess] = useState(false);
     const [isEmailValid, setIsEmailValid] = useState(true);
     const [isPasswordValid, setIsPasswordValid] = useState(true);
@@ -17,7 +16,7 @@ function Register() {
 
     useEffect(() => {
         (async () => {
-            const { data, error } = await supabase.auth.getSession();
+            const { data } = await supabase.auth.getSession();
             // console.log(data, error)
 
             if (data.session) {
