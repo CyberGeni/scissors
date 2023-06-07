@@ -24,7 +24,7 @@ function Register() {
                 navigate('/dashboard')
             }
         })();
-    }, [])
+    }, [navigate])
 
     const register = async (e: React.FormEvent) => {
         e.preventDefault()

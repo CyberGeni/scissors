@@ -21,7 +21,7 @@ function Dashboard() {
         };
     
         fetchUser();
-      }, []);
+      }, [user]);
 
     return (
         <div className=''>welcome to your dashboard, {user?.email}!
