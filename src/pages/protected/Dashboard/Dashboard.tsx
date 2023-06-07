@@ -24,7 +24,7 @@ function Dashboard() {
       }, []);
 
     return (
-        <div>welcome to your dashboard, {user?.email}!
+        <div className=''>welcome to your dashboard, {user?.email}!
 
         </div>
     )
