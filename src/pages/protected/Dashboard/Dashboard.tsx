@@ -7,21 +7,19 @@ function Dashboard() {
 
     useEffect(() => {
         const fetchUser = async () => {
+          
           const session = await supabase.auth.getSession();
-          // const authenticatedUser = session?.data?.session?.user;
-          // const { data: { user } } = session.user
-          console.log(session)
-          console.log(user)
-         console.log(user)
-          if (user) {
-            setUser(user);
+          const currentUser = session?.data?.session?.user;
+
+          if (currentUser) {
+            setUser(currentUser);
           } else {
             setUser(null);
           }
         };
     
         fetchUser();
-      }, [user]);
+      }, []);
 
     return (
         <div className=''>welcome to your dashboard, {user?.email}!
