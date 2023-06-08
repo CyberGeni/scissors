@@ -3,11 +3,14 @@ import { Link, useNavigate } from 'react-router-dom'
 import supabase from '../../../supabase'
 import '../../../index.css'
 // assets
-
+import eye from "../../../assets/icons/eye.svg"
+import eyeSlash from "../../../assets/icons/eye-slash.svg"
 import gradientBg from "../../../assets/images/gradient-bg.png"
 
 function Login() {
     const navigate = useNavigate()
+    const [showPassword, setShowPassword] = useState(false)
+
     const [isLoading, setIsLoading] = useState(false)
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -111,7 +114,6 @@ function Login() {
         }
     }
 
-
     return (
         <div className="font-circular min-h-screen relative grid grid-cols-1 md:grid-cols-2">
             <div className='h-screen w-screen absolute -z-10'>
@@ -126,6 +128,7 @@ function Login() {
                     <div className='flex flex-col items-start space-y-1'>
                         <label htmlFor="email">Email address</label>
                         <input
+                            type='email'
                             placeholder='example@email.com'
                             value={email}
                             onChange={handleEmailChange}
@@ -134,20 +137,26 @@ function Login() {
                         />
                         {emailTouched && !isValidEmail(email) && <small className='text-red-500'>Please enter a valid email address.</small>}
                     </div>
-                    <div className='flex flex-col items-start space-y-1'>
+                    <div className='flex flex-col items-start space-y-1 relative'>
                         <label htmlFor="password">Password</label>
                         <input
-                            type="password"
+                            type={showPassword ? "text" : "password"}
                             placeholder='Password'
                             value={password}
                             onChange={handlePasswordChange}
                             onBlur={handlePasswordBlur}
                             className={`p-4 rounded-lg bg-gray-800 focus:outline-none w-full placeholder:text-gray-400 ${passwordTouched && (!password || password.length < 6) ? 'border-red-500 border' : 'border-gray-700 border'}`}
                         />
+                        <img
+                            className='absolute right-4 top-10 transition-all'
+                            onClick={() => setShowPassword(!showPassword)}
+                            src={showPassword ? eyeSlash : eye}
+                            alt=""
+                        />
                         {passwordTouched && (!password || password.length < 6) && <small className='text-red-500'>Password must be at least 6 characters long.</small>}
                     </div>
                     <div className='py-8 space-y-4'>
-                    <button className='transition-all rounded-lg w-full p-4 disabled:bg-blue-900 bg-blue-700 text-white' type='submit' disabled={isLoading || (!password || password.length < 6) || !isValidEmail(email)}>
+                        <button className='transition-all rounded-lg w-full p-4 disabled:bg-blue-900 bg-blue-700 text-white' type='submit' disabled={isLoading || (!password || password.length < 6) || !isValidEmail(email)}>
                             {
                                 isLoading ?
                                     <div><span>Logging in...</span></div>
