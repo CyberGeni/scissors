@@ -6,6 +6,7 @@ import '../../../index.css'
 import eye from "../../../assets/icons/eye.svg"
 import eyeSlash from "../../../assets/icons/eye-slash.svg"
 import gradientBg from "../../../assets/images/gradient-bg.png"
+import chain from "../../../assets/images/single-chain-login-register.png"
 
 function Login() {
     const navigate = useNavigate()
@@ -119,7 +120,9 @@ function Login() {
             <div className='h-screen w-screen absolute -z-10'>
                 <img className='w-full h-full object-cover' src={gradientBg} alt="" />
             </div>
-
+            <div className='hidden absolute w-screen h-screen md:flex items-center justify-center'>
+             <img className='w-48' src={chain} alt="" />
+            </div>
             <div className='flex flex-col justify-center text-center bg-gray-900 p-8 space-y-10 h-11/12 md:h-full w-11/12 md:w-full mx-auto my-auto rounded-md md:rounded-none'>
                 <h1 className='text-gray-100 font-medium text-4xl tracking-tighter'>scissors sharp<span className='text-blue-700 text-6xl'>.</span></h1>
                 <h3 className='text-gray-200 font-medium text-2xl tracking-tight'>Log in to your account</h3>
