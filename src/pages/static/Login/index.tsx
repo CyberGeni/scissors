@@ -24,15 +24,15 @@ function Login() {
 
     useEffect(() => {
         (async () => {
-            const { data, error } = await supabase.auth.getSession();
-            console.log(data, error)
-
+            const { data } = await supabase.auth.getSession();
+      
             if (data.session) {
                 console.log('logged in')
                 navigate('/dashboard')
             }
         })();
-    }, [navigate])
+    }, [])
+
     const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const newEmail = e.target.value;
         setEmail(newEmail);
@@ -120,7 +120,7 @@ function Login() {
             <div className='h-screen w-screen absolute -z-10'>
                 <img className='w-full h-full object-cover' src={gradientBg} alt="" />
             </div>
-            <div className='hidden absolute w-screen h-screen md:flex items-center justify-center'>
+            <div className='-z-20 hidden absolute w-screen h-screen md:flex items-center justify-center'>
              <img className='w-48' src={chain} alt="" />
             </div>
             <div className='flex flex-col justify-center text-center bg-gray-900 p-8 space-y-10 h-11/12 md:h-full w-11/12 md:w-full mx-auto my-auto rounded-md md:rounded-none'>
@@ -159,7 +159,7 @@ function Login() {
                         {passwordTouched && (!password || password.length < 6) && <small className='text-red-500'>Password must be at least 6 characters long.</small>}
                     </div>
                     <div className='py-8 space-y-4'>
-                        <button className='transition-all rounded-lg w-full p-4 disabled:bg-blue-900 bg-blue-700 text-white' type='submit' disabled={isLoading || (!password || password.length < 6) || !isValidEmail(email)}>
+                        <button className='transition-all rounded-lg w-full p-4 disabled:bg-blue-900 disabled:opacity-50 bg-blue-700 text-white' type='submit' disabled={isLoading || (!password || password.length < 6) || !isValidEmail(email)}>
                             {
                                 isLoading ?
                                     <div><span>Logging in...</span></div>

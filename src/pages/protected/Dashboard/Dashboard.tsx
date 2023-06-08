@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import supabase from '../../../supabase';
 import { User } from '../../../types/userTypes';
 import { useNavigate } from 'react-router-dom';

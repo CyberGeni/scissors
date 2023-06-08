@@ -1,7 +1,10 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom'
 import supabase from '../../../supabase';
+import Navbar from '../../../components/Navbar';
 
+// assets
+import bgGradient from "../../../assets/images/hero-bg-gradient.png"
 function Home() {
 
   const [url, setUrl] = useState('');
@@ -40,8 +43,13 @@ console.log(data, error)
   };
 
   return (
-    <div>
-      <h1>home page</h1>
+    <div className='font-circular '>
+      <div className="absolute w-screen h-screen -z-10">
+        <img className='w-full h-full object-cover object-center' src={bgGradient} alt="" />
+      </div>
+      
+      <Navbar />
+
       <form onSubmit={handleSubmit}>
 
         <input value={url}
