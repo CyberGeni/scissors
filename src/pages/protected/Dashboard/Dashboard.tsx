@@ -1,31 +1,24 @@
-import { useEffect, useState } from 'react';
-import supabase from '../../../supabase'
+import { useEffect } from 'react';
+import supabase from '../../../supabase';
 import { User } from '../../../types/userTypes';
-function Dashboard() {
+import { useNavigate } from 'react-router-dom';
 
-    const [user, setUser] = useState<User | null> (null)
+interface DashboardProps {
+  user: User | null;
+}
 
-    useEffect(() => {
-        const fetchUser = async () => {
-          
-          const session = await supabase.auth.getSession();
-          const currentUser = session?.data?.session?.user;
+const Dashboard: React.FC<DashboardProps> = ({ user }) => {
+  const navigate = useNavigate()
+  const logout = async () => {
+    supabase.auth.signOut()
+    navigate('/')
+  }
 
-          if (currentUser) {
-            setUser(currentUser);
-          } else {
-            setUser(null);
-          }
-        };
-    
-        fetchUser();
-      }, []);
-
-    return (
-        <div className=''>welcome to your dashboard, {user?.email}!
-
-        </div>
-    )
+  return (
+    <div className=''>welcome to your dashboard, {user?.email}!
+      <button onClick={logout}>logout</button>
+    </div>
+  )
 }
 
 export default Dashboard
