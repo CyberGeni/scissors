@@ -111,7 +111,7 @@ function Login() {
             <div className=' flex flex-col justify-center text-center bg-gray-900 p-8 space-y-10 h-11/12 md:h-full w-11/12 md:w-full mx-auto my-auto rounded-md md:rounded-none'>
                 <h1 className='text-gray-100 font-medium text-4xl tracking-tighter'>scissors sharp<span className='text-blue-700 text-6xl'>.</span></h1>
                 <h3 className='text-gray-200 font-medium text-2xl tracking-tight'>Log in to your account</h3>
-                <form className='max-w-sm 2xl:max-w-md w-full mx-auto text-gray-200 space-y-5' action="" onSubmit={login}>
+                <form className='relative z-20 max-w-sm 2xl:max-w-md w-full mx-auto text-gray-200 space-y-5' action="" onSubmit={login}>
                     {errorMessage && <p className='text-[#F97066] w-full bg-[#F14A4A]/10 border border-[#F14A4A]/20 py-2 rounded-md'>{errorMessage}</p>}
                     <div className=' flex flex-col items-start space-y-1'>
                         <label htmlFor="email">Email address</label>
@@ -121,7 +121,7 @@ function Login() {
                             value={email}
                             onChange={handleEmailChange}
                             onBlur={() => setEmailTouched(true)}
-                            className={`relative z-20 p-4 rounded-lg bg-gray-800 focus:outline-none w-full placeholder:text-gray-400 ${emailTouched && !isValidEmail(email) ? 'border-red-500 border' : 'border-gray-700 border'}`}
+                            className={` p-4 rounded-lg bg-gray-800 focus:outline-none w-full placeholder:text-gray-400 ${emailTouched && !isValidEmail(email) ? 'border-red-500 border' : 'border-gray-700 border'}`}
                         />
                         {emailTouched && !isValidEmail(email) && <small className='text-red-500'>Please enter a valid email address.</small>}
                     </div>
@@ -133,7 +133,7 @@ function Login() {
                             value={password}
                             onChange={handlePasswordChange}
                             onBlur={() => setPasswordTouched(true)}
-                            className={`relative z-20 p-4 rounded-lg bg-gray-800 focus:outline-none w-full placeholder:text-gray-400 ${passwordTouched && (!password || password.length < 6) ? 'border-red-500 border' : 'border-gray-700 border'}`}
+                            className={`p-4 rounded-lg bg-gray-800 focus:outline-none w-full placeholder:text-gray-400 ${passwordTouched && (!password || password.length < 6) ? 'border-red-500 border' : 'border-gray-700 border'}`}
                         />
                         <img
                             className='absolute right-4 top-10 transition-all'

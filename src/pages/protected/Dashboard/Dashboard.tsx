@@ -1,20 +1,17 @@
 import { useEffect, useState } from 'react';
 import supabase from '../../../supabase';
-import { User } from '../../../types/userTypes';
+import { User as MyUser } from '../../../types/userTypes'; // Import custom User type with alias
 import { useNavigate } from 'react-router-dom';
 
-// interface DashboardProps {
-//   user: User | null;
-// }
-
 const Dashboard: React.FC = () => {
-  const navigate = useNavigate()
-  const [user, setUser] = useState<User | null>(null)
- 
+  const navigate = useNavigate();
+  const [user, setUser] = useState<MyUser | null>(null); // Use the custom User type
+
   const logout = async () => {
-    supabase.auth.signOut()
-    navigate('/')
-  }
+    supabase.auth.signOut();
+    navigate('/');
+  };
+
   // fetch user data
   useEffect(() => {
     const fetchUser = async () => {
@@ -22,7 +19,7 @@ const Dashboard: React.FC = () => {
       const currentUser = session?.data?.session?.user;
 
       if (currentUser) {
-        setUser(currentUser);
+        setUser(currentUser as MyUser); // Cast currentUser to MyUser type
       } else {
         setUser(null);
       }
@@ -30,15 +27,13 @@ const Dashboard: React.FC = () => {
 
     fetchUser();
   }, []);
+
   return (
-    <div className=''>welcome to your dashboard, {user?.email}!
+    <div className=''>
+      welcome to your dashboard, {user?.email}!
       <button onClick={logout}>logout</button>
     </div>
-  )
-}
+  );
+};
 
-export default Dashboard
-
-function setUser(currentUser: User) {
-  throw new Error('Function not implemented.');
-}
+export default Dashboard;

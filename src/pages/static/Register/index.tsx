@@ -105,7 +105,7 @@ function Register() {
             <div className='flex flex-col justify-center text-center bg-gray-900 p-8 space-y-10 h-11/12 md:h-full w-11/12 md:w-full mx-auto my-auto rounded-md md:rounded-none'>
                 <h1 className='text-gray-100 font-medium text-4xl tracking-tighter'>scissors sharp<span className='text-blue-700 text-6xl'>.</span></h1>
                 <h3 className='text-gray-200 font-medium text-2xl tracking-tight'>Create an account account</h3>
-                <form className='max-w-sm 2xl:max-w-md w-full mx-auto text-gray-200 space-y-5' action="" onSubmit={register}>
+                <form className='relative z-20 max-w-sm 2xl:max-w-md w-full mx-auto text-gray-200 space-y-5' action="" onSubmit={register}>
                     {errorMessage && <p className='text-[#F97066] w-full bg-[#F14A4A]/10 border border-[#F14A4A]/20 py-2 rounded-md'>{errorMessage}</p>}
                     <div className='flex flex-col items-start space-y-1'>
                         <label htmlFor="email">Email address</label>
