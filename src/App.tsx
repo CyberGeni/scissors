@@ -10,8 +10,8 @@ import supabase from './supabase'
 import { useState, useEffect } from 'react'
 
 const App: React.FC = () => {
- const [authenticated, setAuthenticated] = useState<boolean>(false);
-  
+  const [authenticated, setAuthenticated] = useState<boolean>(false);
+
   // Check if user is authenticated to view protected routes
   useEffect(() => {
     (async () => {
@@ -41,11 +41,14 @@ const App: React.FC = () => {
           <Route
             path="/dashboard"
             element={
-              <ProtectedRoutes authenticated={authenticated}>
-                <Dashboard />
-              </ProtectedRoutes>
+              authenticated && (
+                <ProtectedRoutes authenticated={authenticated}>
+                  <Dashboard />
+                </ProtectedRoutes>
+              ) 
             }
           />
+
           {/* </ProtectedRoutes> */}
         </Routes>
       </Router>

@@ -17,8 +17,6 @@ function Register() {
     const [password, setPassword] = useState("")
     const [errorMessage, setErrorMessage] = useState('');
     const [success, setSuccess] = useState(false);
-    const [isEmailValid, setIsEmailValid] = useState(true);
-    const [isPasswordValid, setIsPasswordValid] = useState(true);
     const [emailTouched, setEmailTouched] = useState(false);
     const [passwordTouched, setPasswordTouched] = useState(false);
 
@@ -43,50 +41,32 @@ function Register() {
         setPassword(newPassword);
     };
 
-    const handleEmailBlur = () => {
-        setEmailTouched(true);
+    // Perform client-side form validation
+    const isValidEmail = (email: string): boolean => {
+        // Regular expression pattern for email validation
+        const emailPattern = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+        return emailPattern.test(email);
     };
-
-    const handlePasswordBlur = () => {
-        setPasswordTouched(true);
-    };
-
- // Perform client-side form validation
- const isValidEmail = (email: string): boolean => {
-    // Regular expression pattern for email validation
-    const emailPattern = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-    return emailPattern.test(email);
-};
 
     const register = async (e: React.FormEvent) => {
         e.preventDefault()
         setIsLoading(true);
-       
+
 
         if (!email || !isValidEmail(email)) {
             setIsLoading(false);
-            setIsEmailValid(false);
             setErrorMessage('Please enter a valid email address.');
             return;
         }
         if (!password) {
             setIsLoading(false);
             setErrorMessage('Please enter a password.');
-            setIsPasswordValid(false);
         } else if (password.length < 6) {
             setIsLoading(false);
-            setIsPasswordValid(false);
             setErrorMessage('Password must be at least 6 characters long.');
             return;
         }
 
-        // if (!isEmailValid || !isPasswordValid) {
-        //     setIsPasswordValid(false);
-        //     setIsEmailValid(false);
-        //     setErrorMessage('Please fill in all required fields.');
-        //     return;
-        // }  
-        
         // register functionality
         const { data, error } = await supabase.auth.signUp({
             email,
@@ -120,20 +100,20 @@ function Register() {
                 <img className='w-full h-full object-cover' src={gradientBg} alt="" />
             </div>
             <div className='hidden absolute w-screen h-screen md:flex items-center justify-center'>
-             <img className='w-48' src={chain} alt="" />
+                <img className='w-48' src={chain} alt="" />
             </div>
             <div className='flex flex-col justify-center text-center bg-gray-900 p-8 space-y-10 h-11/12 md:h-full w-11/12 md:w-full mx-auto my-auto rounded-md md:rounded-none'>
                 <h1 className='text-gray-100 font-medium text-4xl tracking-tighter'>scissors sharp<span className='text-blue-700 text-6xl'>.</span></h1>
                 <h3 className='text-gray-200 font-medium text-2xl tracking-tight'>Create an account account</h3>
                 <form className='max-w-sm 2xl:max-w-md w-full mx-auto text-gray-200 space-y-5' action="" onSubmit={register}>
-                {errorMessage && <p className='text-[#F97066] w-full bg-[#F14A4A]/10 border border-[#F14A4A]/20 py-2 rounded-md'>{errorMessage}</p>}
+                    {errorMessage && <p className='text-[#F97066] w-full bg-[#F14A4A]/10 border border-[#F14A4A]/20 py-2 rounded-md'>{errorMessage}</p>}
                     <div className='flex flex-col items-start space-y-1'>
                         <label htmlFor="email">Email address</label>
                         <input
                             placeholder='example@email.com'
                             value={email}
                             onChange={handleEmailChange}
-                            onBlur={handleEmailBlur}
+                            onBlur={() => setEmailTouched(true)}
                             className={`p-4 rounded-lg bg-gray-800 focus:outline-none w-full placeholder:text-gray-400 ${emailTouched && !isValidEmail(email) ? 'border-red-500 border' : 'border-gray-700 border'}`}
                         />
                         {emailTouched && !isValidEmail(email) && <small className='text-red-500'>Please enter a valid email address.</small>}
@@ -145,7 +125,7 @@ function Register() {
                             placeholder='Password'
                             value={password}
                             onChange={handlePasswordChange}
-                            onBlur={handlePasswordBlur}
+                            onBlur={() => setPasswordTouched(true)}
                             className={`p-4 rounded-lg bg-gray-800 focus:outline-none w-full placeholder:text-gray-400 ${passwordTouched && (!password || password.length < 6) ? 'border-red-500 border' : 'border-gray-700 border'}`}
                         />
                         <img

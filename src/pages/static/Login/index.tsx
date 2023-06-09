@@ -18,15 +18,13 @@ function Login() {
     const [password, setPassword] = useState("")
     const [errorMessage, setErrorMessage] = useState('');
     const [success, setSuccess] = useState(false);
-    const [isEmailValid, setIsEmailValid] = useState(true);
-    const [isPasswordValid, setIsPasswordValid] = useState(true);
     const [emailTouched, setEmailTouched] = useState(false);
     const [passwordTouched, setPasswordTouched] = useState(false);
 
     useEffect(() => {
         (async () => {
             const { data } = await supabase.auth.getSession();
-      
+
             if (data.session) {
                 console.log('logged in')
                 navigate('/dashboard')
@@ -44,14 +42,6 @@ function Login() {
         setPassword(newPassword);
     };
 
-    const handleEmailBlur = () => {
-        setEmailTouched(true);
-    };
-
-    const handlePasswordBlur = () => {
-        setPasswordTouched(true);
-    };
-
     // Perform client-side form validation
     const isValidEmail = (email: string): boolean => {
         // Regular expression pattern for email validation
@@ -62,41 +52,35 @@ function Login() {
         e.preventDefault()
         setIsLoading(true);
 
-        // Reset validation status for each submit attempt
-        setIsEmailValid(true);
-        setIsPasswordValid(true);
+        // run some client side validation
 
+        // email validation
         if (!email || !isValidEmail(email)) {
             setIsLoading(false);
-            setIsEmailValid(false);
             setErrorMessage('Please enter a valid email address.');
             return;
         } else {
-            setIsEmailValid(true);
             setErrorMessage('');
         }
-
+        // password validation
         if (!password) {
             setIsLoading(false);
             setErrorMessage('Please enter a password.');
-            setIsPasswordValid(false);
         } else if (password.length < 6) {
             setIsLoading(false);
-            setIsPasswordValid(false);
             setErrorMessage('Password must be at least 6 characters long.');
             return;
         } else {
-            setIsPasswordValid(true);
             setErrorMessage('');
         }
 
         // sign in functionality
-        const { data, error } = await supabase.auth.signInWithPassword({
+        const { error } = await supabase.auth.signInWithPassword({
             email,
             password
         })
 
-        // error messages from supabase authentication
+        // handling error messages from supabase authentication
         if (error?.message) {
             if (error?.message == 'Invalid login credentials') {
                 setErrorMessage('Your email or password is incorrect.');
@@ -122,22 +106,22 @@ function Login() {
                 <img className='w-full h-full object-cover' src={gradientBg} alt="" />
             </div>
             <div className='z-10 hidden absolute w-screen h-screen md:flex items-center justify-center'>
-             <img className='w-48' src={chain} alt="" />
+                <img className='w-48' src={chain} alt="" />
             </div>
-            <div className='relative z-20 flex flex-col justify-center text-center bg-gray-900 p-8 space-y-10 h-11/12 md:h-full w-11/12 md:w-full mx-auto my-auto rounded-md md:rounded-none'>
+            <div className=' flex flex-col justify-center text-center bg-gray-900 p-8 space-y-10 h-11/12 md:h-full w-11/12 md:w-full mx-auto my-auto rounded-md md:rounded-none'>
                 <h1 className='text-gray-100 font-medium text-4xl tracking-tighter'>scissors sharp<span className='text-blue-700 text-6xl'>.</span></h1>
                 <h3 className='text-gray-200 font-medium text-2xl tracking-tight'>Log in to your account</h3>
                 <form className='max-w-sm 2xl:max-w-md w-full mx-auto text-gray-200 space-y-5' action="" onSubmit={login}>
                     {errorMessage && <p className='text-[#F97066] w-full bg-[#F14A4A]/10 border border-[#F14A4A]/20 py-2 rounded-md'>{errorMessage}</p>}
-                    <div className='flex flex-col items-start space-y-1'>
+                    <div className=' flex flex-col items-start space-y-1'>
                         <label htmlFor="email">Email address</label>
                         <input
                             type='email'
                             placeholder='example@email.com'
                             value={email}
                             onChange={handleEmailChange}
-                            onBlur={handleEmailBlur}
-                            className={`p-4 rounded-lg bg-gray-800 focus:outline-none w-full placeholder:text-gray-400 ${emailTouched && !isValidEmail(email) ? 'border-red-500 border' : 'border-gray-700 border'}`}
+                            onBlur={() => setEmailTouched(true)}
+                            className={`relative z-20 p-4 rounded-lg bg-gray-800 focus:outline-none w-full placeholder:text-gray-400 ${emailTouched && !isValidEmail(email) ? 'border-red-500 border' : 'border-gray-700 border'}`}
                         />
                         {emailTouched && !isValidEmail(email) && <small className='text-red-500'>Please enter a valid email address.</small>}
                     </div>
@@ -148,8 +132,8 @@ function Login() {
                             placeholder='Password'
                             value={password}
                             onChange={handlePasswordChange}
-                            onBlur={handlePasswordBlur}
-                            className={`p-4 rounded-lg bg-gray-800 focus:outline-none w-full placeholder:text-gray-400 ${passwordTouched && (!password || password.length < 6) ? 'border-red-500 border' : 'border-gray-700 border'}`}
+                            onBlur={() => setPasswordTouched(true)}
+                            className={`relative z-20 p-4 rounded-lg bg-gray-800 focus:outline-none w-full placeholder:text-gray-400 ${passwordTouched && (!password || password.length < 6) ? 'border-red-500 border' : 'border-gray-700 border'}`}
                         />
                         <img
                             className='absolute right-4 top-10 transition-all'
