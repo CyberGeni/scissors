@@ -34,7 +34,7 @@ function Navbar() {
                         }
                     </div>
                 </div>
-                <div className={`flex items-center justify-center transition-all backdrop-blur-xl w-screen h-screen fixed ${showNav ? "left-0 " : "left-[100vw]"} `}>
+                <div className={`flex items-center justify-center transition-all backdrop-blur-xl w-screen h-screen fixed z-10 ${showNav ? "left-0 " : "left-[100vw]"} `}>
                     <div className='text-gray-200 text-xl w-full px-8'>
                         <nav className='flex flex-col space-y-8'>
                             <a onClick={() => setShowNav(!showNav)} href="#features">Features</a>
