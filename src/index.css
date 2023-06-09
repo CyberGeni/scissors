@@ -5,4 +5,25 @@
 * {
     scroll-behavior: smooth;
 }
-                                                
+.slide-enter {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  
+  .slide-enter-active {
+    opacity: 1;
+    transform: translateY(0%);
+    transition: opacity 300ms, transform 300ms;
+  }
+  
+  .slide-exit {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+  
+  .slide-exit-active {
+    opacity: 0;
+    transform: translateY(-100%);
+    transition: opacity 300ms, transform 300ms;
+  }
+  

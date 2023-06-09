@@ -4,6 +4,9 @@ import Navbar from '../../../components/Navbar';
 
 // assets
 import bgGradient from "../../../assets/images/hero-bg-gradient.png"
+import chain from "../../../assets/images/hero-chain.png"
+import chainBlurred from "../../../assets/images/hero-blurred-chain.png"
+import TextCarousel from '../../../components/TextCarousel/TextCarousel';
 function Home() {
 
 //   const [url, setUrl] = useState('');
@@ -47,15 +50,18 @@ function Home() {
         <img className='w-full h-full object-cover object-center' src={bgGradient} alt="" />
       </div>
       {/* hero */}
-      <section className=' text-center px-[5%] py-8'>
+      <section className='relative text-center px-[5%] py-8'>
         <Navbar />
         <div className='p-4 mx-auto mt-[3%] border border-[#1D2939] min-h-[77vh] flex flex-col justify-center'>
-          <h1 className='lg:max-w-3xl mx-auto text-5xl md:text-6xl lg:text-7xl p-4 font-bold from-[#D0D5DD] to-[#D0D5DD]/60 bg-gradient-to-b bg-clip-text text-transparent'>Make that <span className='from-[#D700EA]/70 from-20% via-[#0A5DEA] via-50% to-[#D700EA]/70 to-80% bg-gradient-to-bl bg-clip-text text-transparent'>event</span> link shorter. Super fast!</h1>
+          <img className='absolute w-14 md:w-20 lg:w-40 xl:w-44 2xl:w-48 top-32 left-0' src={chain} alt="" draggable={false}/>
+          <img className='absolute w-14 md:w-20 lg:w-40 xl:w-44 2xl:w-48 bottom-16 right-40' src={chainBlurred} alt="" draggable={false} />
+          
+          <h1 className='lg:max-w-4xl mx-auto text-5xl md:text-7xl lg:text-[85px] p-4 font-medium from-[#D0D5DD] to-[#D0D5DD]/60 bg-gradient-to-b bg-clip-text text-transparent'>Make that <TextCarousel /> link shorter. Super fast!</h1>
           <p className='text-gray-400 max-w-lg mx-auto my-8'>Say good bye to long, cumbersome URLs and hello to a simpler, sleeker way to shorten, share and manage your links.</p>
           <div className='max-w-lg mx-auto space-y-3 w-full'>
             <span className='text-gray-300'>Enter your link now to shorten it.</span>
             <form action="" className='flex sm:grid sm:grid-cols-4 space-x-2 '>
-              <input className='text-gray-200 border-gray-600 border h-fit col-span-3 w-full p-4 rounded-lg bg-gray-800 shadow-gray-700/40 shadow-inner focus:outline-none placeholder:text-gray-400' type="text" placeholder='Enter link to be shortened' />
+              <input className='text-gray-200 border-gray-600 border h-fit col-span-3 w-full p-4 rounded-lg bg-gray-700 shadow-gray-600/40 shadow-inner focus:outline-none placeholder:text-gray-400' type="text" placeholder='Enter link to be shortened' />
               <button className='h-fit w-fit whitespace-nowrap sm:w-full rounded-lg p-4 bg-blue-700 text-white shadow-gray-300/20 shadow-inner' type="submit">Shorten link</button>
             </form>
           </div>

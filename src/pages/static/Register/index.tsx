@@ -137,7 +137,7 @@ function Register() {
                         {passwordTouched && (!password || password.length < 6) && <small className='text-red-500'>Password must be at least 6 characters long.</small>}
                     </div>
                     <div className='py-8 space-y-4'>
-                        <button className='transition-all rounded-lg w-full p-4 disabled:bg-blue-900 bg-blue-700 text-white' type='submit' disabled={isLoading || (!password || password.length < 6) || !isValidEmail(email)}>
+                        <button className='transition-all rounded-lg w-full p-4 disabled:bg-blue-900 disabled:opacity-50 bg-blue-700 text-white' type='submit' disabled={isLoading || (!password || password.length < 6) || !isValidEmail(email)}>
                             {
                                 isLoading ?
                                     <div><span>Creating your account...</span></div>

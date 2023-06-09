@@ -133,7 +133,7 @@ function Login() {
                             value={password}
                             onChange={handlePasswordChange}
                             onBlur={() => setPasswordTouched(true)}
-                            className={`p-4 rounded-lg bg-gray-800 focus:outline-none w-full placeholder:text-gray-400 ${passwordTouched && (!password || password.length < 6) ? 'border-red-500 border' : 'border-gray-700 border'}`}
+                            className={`p-4 rounded-lg bg-gray-800 autofill:bg-gray-900  focus:outline-none w-full placeholder:text-gray-400 ${passwordTouched && (!password || password.length < 6) ? 'border-red-500 border' : 'border-gray-700 border'}`}
                         />
                         <img
                             className='absolute right-4 top-10 transition-all'
