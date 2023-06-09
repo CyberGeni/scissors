@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import supabase from '../../../supabase'
 import '../../../index.css'
 // assets
@@ -10,6 +10,7 @@ import chain from "../../../assets/images/single-chain-login-register.png"
 
 function Login() {
     const navigate = useNavigate()
+    const location = useLocation()
     const [showPassword, setShowPassword] = useState(false)
 
     const [isLoading, setIsLoading] = useState(false)
@@ -31,7 +32,7 @@ function Login() {
                 navigate('/dashboard')
             }
         })();
-    }, [])
+    }, [location, navigate])
 
     const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const newEmail = e.target.value;
@@ -120,10 +121,10 @@ function Login() {
             <div className='h-screen w-screen absolute -z-10'>
                 <img className='w-full h-full object-cover' src={gradientBg} alt="" />
             </div>
-            <div className='-z-20 hidden absolute w-screen h-screen md:flex items-center justify-center'>
+            <div className='z-10 hidden absolute w-screen h-screen md:flex items-center justify-center'>
              <img className='w-48' src={chain} alt="" />
             </div>
-            <div className='flex flex-col justify-center text-center bg-gray-900 p-8 space-y-10 h-11/12 md:h-full w-11/12 md:w-full mx-auto my-auto rounded-md md:rounded-none'>
+            <div className='relative z-20 flex flex-col justify-center text-center bg-gray-900 p-8 space-y-10 h-11/12 md:h-full w-11/12 md:w-full mx-auto my-auto rounded-md md:rounded-none'>
                 <h1 className='text-gray-100 font-medium text-4xl tracking-tighter'>scissors sharp<span className='text-blue-700 text-6xl'>.</span></h1>
                 <h3 className='text-gray-200 font-medium text-2xl tracking-tight'>Log in to your account</h3>
                 <form className='max-w-sm 2xl:max-w-md w-full mx-auto text-gray-200 space-y-5' action="" onSubmit={login}>
