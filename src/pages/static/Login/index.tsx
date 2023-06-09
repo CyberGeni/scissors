@@ -102,10 +102,10 @@ function Login() {
 
     return (
         <div className="font-circular min-h-screen relative grid grid-cols-1 md:grid-cols-2">
-            <div className='h-screen w-screen absolute -z-10'>
+            <div className='h-screen w-screen fixed -z-10'>
                 <img className='w-full h-full object-cover' src={gradientBg} alt="" />
             </div>
-            <div className='z-10 hidden absolute w-screen h-screen md:flex items-center justify-center'>
+            <div className='z-10 hidden fixed w-screen h-screen md:flex items-center justify-center'>
                 <img className='w-48' src={chain} alt="" />
             </div>
             <div className=' flex flex-col justify-center text-center bg-gray-900 p-8 space-y-10 h-11/12 md:h-full w-11/12 md:w-full mx-auto my-auto rounded-md md:rounded-none'>
