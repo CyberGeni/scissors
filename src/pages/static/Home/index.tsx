@@ -11,43 +11,46 @@ function Home() {
 
   const [url, setUrl] = useState('');
   const [shortenedUrl, setShortenedUrl] = useState('');
+ // Generate a unique identifier for the shortened link
+    const handleSubmit = async (e: { preventDefault: () => void }) => {
+      e.preventDefault();
+    
+      // Generate a unique identifier for the shortened link
+      const generateUniqueId = () => {
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        const length = 6; // Adjust the desired length of the unique identifier
+  
+        let result = '';
+        for (let i = 0; i < length; i++) {
+          const randomIndex = Math.floor(Math.random() * characters.length);
+          result += characters.charAt(randomIndex);
+        }
+  
+        return result;
+      };
+      const uniqueId = generateUniqueId();
+      const timestamp = new Date().toISOString();
 
-  const handleSubmit = async (e: { preventDefault: () => void; }) => {
-    e.preventDefault();
-
-    // Generate a unique identifier for the shortened link
-    const generateUniqueId = () => {
-      const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-      const length = 6; // Adjust the desired length of the unique identifier
-
-      let result = '';
-      for (let i = 0; i < length; i++) {
-        const randomIndex = Math.floor(Math.random() * characters.length);
-        result += characters.charAt(randomIndex);
-      }
-
-      return result;
+      // Construct the shortened URL
+      const shortenedLink = `https://ascissorsproduct.netlify.app/${uniqueId}`;
+    
+      // Save the original URL and unique identifier to the database
+      await supabase
+        .from('links')
+        .insert([
+          {
+            original_url: url,
+            identifier: uniqueId,
+            created_at: timestamp,
+            short_url: shortenedLink,
+          },
+        ])
+        .single();
+    
+      // Update the state with the shortened URL
+      setShortenedUrl(shortenedLink);
     };
-    const uniqueId = generateUniqueId();
-    const timestamp = new Date().toISOString();
-    // Save the original URL and unique identifier to the database
-    const { data, error } = await supabase
-      .from('links')
-      .insert([{ 
-        original_url: url, 
-        identifier: uniqueId,
-        created_at: timestamp,
-        short_url: shortenedUrl,
-        // is_authenticated
-      }])
-      .single();
-console.log(data, error)
-    // Construct the shortened URL
-    const shortenedLink = `https://ascissorsproduct.netlify.app/${uniqueId}`;
-
-    // Update the state with the shortened URL
-    setShortenedUrl(shortenedLink);
-  };
+    
 
   return (
     <div className='font-circular'>
