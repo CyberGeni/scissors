@@ -35,7 +35,7 @@ const App: React.FC = () => {
 
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="*" element={<h1>404</h1>} />
+          <Route path="*" element={<h1>404 no route found</h1>} />
 
           {/* <ProtectedRoutes> */}
           <Route

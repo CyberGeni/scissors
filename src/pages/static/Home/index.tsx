@@ -32,7 +32,7 @@ function Home() {
       const timestamp = new Date().toISOString();
 
       // Construct the shortened URL
-      const shortenedLink = `https://ascissorsproduct.netlify.app/${uniqueId}`;
+      const shortenedLink = `https://btchr.url/${uniqueId}`;
     
       // Save the original URL and unique identifier to the database
       await supabase
