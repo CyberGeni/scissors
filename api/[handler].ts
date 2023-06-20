@@ -1,12 +1,19 @@
+
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { createClient } from '@supabase/supabase-js';
-// import supabase  from "../src/supabase.js";
 
 export default async function handler(request: VercelRequest, response: VercelResponse) {
   const { identifier } = request.query;
+  console.log('identifier:', identifier)
+  
+  // Extract identifier from URL path
+  const identifierFromPath = request.url?.replace('/', '');
+ console.log('identifier from path:',identifierFromPath)
   const supabaseUrl = 'https://nfzttdrvnjxlwdllziia.supabase.co';
-  const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5menR0ZHJ2bmp4bHdkbGx6aWlhIiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODYwODIxNDcsImV4cCI6MjAwMTY1ODE0N30.XtA0FFtAelqBvREwlXRgH-5ToXW7f_dmSHORckTJ84Y';
-  const supabase = createClient(supabaseUrl, supabaseKey);
+  
+  // eslint-disable-next-line
+  // @ts-ignore
+  const supabase = createClient(supabaseUrl, process.env.VITE_SUPABASE_KEY);
   
   try {
     const { data: links, error } = await supabase
@@ -16,7 +23,8 @@ export default async function handler(request: VercelRequest, response: VercelRe
       .single();
 
     if (error || !links) {
-      console.log(error, links, 'hello')
+      console.log('error:', error)
+      console.log('links:', links)
       return response.status(404).json({ message: 'URL not found' });
     }
 

@@ -7,6 +7,20 @@ const Dashboard: React.FC = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState<MyUser | null>(null); // Use the custom User type
 
+
+  // redirect to login if not logged in
+  useEffect(() => {
+    (async () => {
+        const { data } = await supabase.auth.getSession();
+
+        if (!data.session) {
+            navigate('/login')
+            alert('you need to be logged in to view this page')
+        }
+    })();
+}, [navigate])
+
+
   const logout = async () => {
     supabase.auth.signOut();
     navigate('/');

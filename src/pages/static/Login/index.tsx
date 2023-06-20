@@ -26,8 +26,8 @@ function Login() {
             const { data } = await supabase.auth.getSession();
 
             if (data.session) {
-                console.log('logged in')
                 navigate('/dashboard')
+                alert('already logged in')
             }
         })();
     }, [location, navigate])

@@ -1,5 +1,5 @@
 import './App.css'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import Home from './pages/static/Home'
 import Login from './pages/static/Login/index'
 import Register from './pages/static/Register/index'
@@ -8,6 +8,7 @@ import Dashboard from './pages/protected/Dashboard/Dashboard'
 import ProtectedRoutes from './components/ProtectedRoutes'
 import supabase from './supabase'
 import { useState, useEffect } from 'react'
+// import RedirectToServerlessFunction from './components/Redirect/RedirectToServerlessFunction'
 
 const App: React.FC = () => {
   const [authenticated, setAuthenticated] = useState<boolean>(false);
@@ -25,34 +26,28 @@ const App: React.FC = () => {
   }, []);
 
   return (
-    <>
-      <Router>
-        <Routes>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+        </Route>
 
-          <Route path="/" element={<Layout />}>
-            <Route index element={<Home />} />
-          </Route>
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
 
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="*" element={<h1>404 no route found</h1>} />
+        <Route path="/dashboard" element={authenticated ? (
+          <ProtectedRoutes authenticated={authenticated}>
+            <Dashboard />
+          </ProtectedRoutes>
+        ) : (
+          <Navigate to="/login" replace />
+        )} />
 
-          {/* <ProtectedRoutes> */}
-          <Route
-            path="/dashboard"
-            element={
-              authenticated && (
-                <ProtectedRoutes authenticated={authenticated}>
-                  <Dashboard />
-                </ProtectedRoutes>
-              ) 
-            }
-          />
+        {/* Wildcard route for handling shortened URLs
+        <Route path="/*" element={<RedirectToServerlessFunction />} /> */}
+      </Routes>
+    </Router>
 
-          {/* </ProtectedRoutes> */}
-        </Routes>
-      </Router>
-    </>
   )
 }
 
