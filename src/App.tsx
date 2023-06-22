@@ -4,6 +4,7 @@ import Home from './pages/static/Home'
 import Login from './pages/static/Login/index'
 import Register from './pages/static/Register/index'
 import Layout from './components/Layout'
+import DashboardLayout from './pages/protected/Dashboard'
 import Dashboard from './pages/protected/Dashboard/Dashboard'
 import ProtectedRoutes from './components/ProtectedRoutes'
 import supabase from './supabase'
@@ -32,14 +33,16 @@ const App: React.FC = () => {
 
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-
+        {/* internal route */}
         <Route path="/dashboard" element={authenticated ? (
           <ProtectedRoutes authenticated={authenticated}>
-            <Dashboard />
+            <DashboardLayout />
           </ProtectedRoutes>
         ) : (
           <Navigate to="/login" replace />
-        )} />
+        )}>
+          <Route index element={<Dashboard />} />
+        </Route>
 
       </Routes>
     </Router>

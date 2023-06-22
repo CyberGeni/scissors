@@ -86,16 +86,6 @@ function Home() {
           </div>
         </div>
       </section>
-
-      {/* <form onSubmit={handleSubmit}>
-
-        <input value={url}
-          onChange={(e) => setUrl(e.target.value)} type="text" placeholder='enter link to be shortened' />
-        <button className='p-2 bg-blue-800 text-white'>shorten link</button>
-      </form>
-      <p>here's your shortened url: {shortenedUrl}</p>
-      <Link to="/login">login</Link>
-      <Link to="/register">register</Link> */}
     </div>
   )
 }
