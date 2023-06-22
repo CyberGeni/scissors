@@ -41,25 +41,28 @@ const Dashboard: React.FC = () => {
       <section className='sm:ml-[25%] lg:ml-[20%] w-full'>
         {/* topbar */}
         <div className='border-b border-gray-200 py-4 px-6 flex items-center justify-between w-full'>
-          <h1 className='text-gray-800 font-semibold tracking-tight text-lg'>Dashboard</h1>
-          <div className='flex items-center space-x-4 mr-6'>
+          <div>
+          <h1 className="sm:hidden text-blue-600 text-3xl font-medium tracking-tighter whitespace-nowrap ">btchr <span className="text-blue-900 text-3xl leading-none -ml-2.5">.</span></h1>
+            <h1 className='hidden sm:flex text-gray-800 font-semibold tracking-tight text-lg'>Dashboard</h1>
+          </div>
+          <div className='flex items-center space-x-4 sm:mr-6'>
             <button className='h-fit w-fit whitespace-nowrap sm:w-full rounded-lg px-4 py-3 bg-blue-700 text-white shadow-gray-300/20 shadow-inner' type="submit">Shorten new link</button>
             <div className='flex items-center w-full space-x-1'>
               <img className='w-8 h-8' src={userIcon} alt="" />
-              <div className='flex flex-col w-fit -space-y-1'>
+              <div className='hidden sm:flex flex-col w-fit -space-y-1'>
                 <span className='text-gray-700'>cybergenie</span>
                 <span className='text-sm text-gray-500'>{user?.email}</span>
               </div>
             </div>
           </div>
         </div>
-        <main className='p-6'>
+        <main className=''>
           <Outlet />
         </main>
         {/* main content */}
-        
+
       </section>
-   </div>
+    </div>
   );
 };
 

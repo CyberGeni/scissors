@@ -27,7 +27,6 @@ function Login() {
 
             if (data.session) {
                 navigate('/dashboard')
-                alert('already logged in')
             }
         })();
     }, [location, navigate])
