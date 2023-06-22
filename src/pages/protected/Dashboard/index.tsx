@@ -38,7 +38,7 @@ const Dashboard: React.FC = () => {
   return (
     <div className='flex font-circular'>
       <Sidebar />
-      <section className='ml-[20%] w-full'>
+      <section className='sm:ml-[25%] lg:ml-[20%] w-full'>
         {/* topbar */}
         <div className='border-b border-gray-200 py-4 px-6 flex items-center justify-between w-full'>
           <h1 className='text-gray-800 font-semibold tracking-tight text-lg'>Dashboard</h1>

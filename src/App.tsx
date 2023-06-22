@@ -9,6 +9,8 @@ import Dashboard from './pages/protected/Dashboard/Dashboard'
 import ProtectedRoutes from './components/ProtectedRoutes'
 import supabase from './supabase'
 import { useState, useEffect } from 'react'
+import Plans from './pages/protected/Dashboard/Plans'
+import Settings from './pages/protected/Dashboard/Settings'
 const App: React.FC = () => {
   const [authenticated, setAuthenticated] = useState<boolean>(false);
 
@@ -42,8 +44,18 @@ const App: React.FC = () => {
           <Navigate to="/login" replace />
         )}>
           <Route index element={<Dashboard />} />
+          <Route path="/dashboard/plans" element={<Plans />} />
+          <Route path="/dashboard/settings" element={<Settings />} />
         </Route>
-
+        {/* <Route path="/plans" element={authenticated ? (
+          <ProtectedRoutes authenticated={authenticated}>
+            <Plans />
+          </ProtectedRoutes>
+        ) : (
+          <Navigate to="/login" replace />
+        )}>
+          <Route index element={<Dashboard />} />
+        </Route> */}
       </Routes>
     </Router>
 
