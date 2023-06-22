@@ -8,8 +8,6 @@ import Dashboard from './pages/protected/Dashboard/Dashboard'
 import ProtectedRoutes from './components/ProtectedRoutes'
 import supabase from './supabase'
 import { useState, useEffect } from 'react'
-// import RedirectToServerlessFunction from './components/Redirect/RedirectToServerlessFunction'
-
 const App: React.FC = () => {
   const [authenticated, setAuthenticated] = useState<boolean>(false);
 
@@ -43,8 +41,6 @@ const App: React.FC = () => {
           <Navigate to="/login" replace />
         )} />
 
-        {/* Wildcard route for handling shortened URLs
-        <Route path="/*" element={<RedirectToServerlessFunction />} /> */}
       </Routes>
     </Router>
 
