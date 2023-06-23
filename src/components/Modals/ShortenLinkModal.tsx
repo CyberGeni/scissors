@@ -7,6 +7,8 @@ export default function ShortenLinkModal() {
     const [user, setUser] = useState<MyUser | null>(null); // Use the custom User type
     const [linkName, setLinkName] = useState('')
     const [url, setUrl] = useState('')
+    
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [shortenedUrl, setShortenedUrl] = useState('')
     const [customIdentifier, setCustomIdentifier] = useState('')
 
