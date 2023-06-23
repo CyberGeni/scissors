@@ -8,6 +8,8 @@ export default function ShortenLinkModal() {
     const [linkName, setLinkName] = useState('')
     const [url, setUrl] = useState('')
     
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore next line
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [shortenedUrl, setShortenedUrl] = useState('')
     const [customIdentifier, setCustomIdentifier] = useState('')
