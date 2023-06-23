@@ -4,6 +4,7 @@ import { User as MyUser } from '../../../types/userTypes'; // Import custom User
 import { Outlet, useNavigate } from 'react-router-dom';
 import Sidebar from '../../../components/Dashboard/Sidebar/Sidebar';
 import userIcon from '../../../assets/icons/user.png';
+import ShortenLink from '../../../components/Modals/ShortenLinkModal';
 const Dashboard: React.FC = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState<MyUser | null>(null); // Use the custom User type
@@ -46,7 +47,8 @@ const Dashboard: React.FC = () => {
             <h1 className='hidden sm:flex text-gray-800 font-semibold tracking-tight text-lg'>Dashboard</h1>
           </div>
           <div className='flex items-center space-x-4 sm:mr-6'>
-            <button className='h-fit w-fit whitespace-nowrap sm:w-full rounded-lg px-4 py-3 bg-blue-700 text-white shadow-gray-300/20 shadow-inner' type="submit">Shorten new link</button>
+            {/* <button className='h-fit w-fit whitespace-nowrap sm:w-full rounded-lg px-4 py-3 bg-blue-700 text-white shadow-gray-300/20 shadow-inner' type="submit">Shorten new link</button> */}
+            <ShortenLink />
             <div className='flex items-center w-full space-x-1'>
               <img className='w-8 h-8' src={userIcon} alt="" />
               <div className='hidden sm:flex flex-col w-fit -space-y-1'>
