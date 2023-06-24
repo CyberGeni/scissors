@@ -63,7 +63,7 @@ const Dashboard: React.FC = () => {
                 <div className='relative'>
                     <div className="w-full lg:w-[30%] border-r border-gray-200">
                         {/* link header */}
-                        <div className="w-full lg:w-[22.9%] fixed px-6 py-4 bg-gray-50 flex items-center justify-between">
+                        <div className="w-full lg:w-[24%] fixed px-6 py-4 bg-gray-50 flex items-center justify-between">
                             <h3>All links</h3>
                             <div className='flex rounded-md border border-gray-100 items-center bg-white space-x-2 px-5 py-3 shadow-[1px_1px_2px_0px_rgba(203,203,209,0.29)]'>
                                 <span className='text-gray-500'>Sort by</span>
@@ -71,7 +71,7 @@ const Dashboard: React.FC = () => {
                             </div>
                         </div>
                         {/* list of links */}
-                        <div className='w-full pt-[82px] overflow-y-scroll h-[89vh]'>
+                        <div className='w-full pt-[82px] mb-20 sm:mb-0 overflow-y-scroll h-[89vh]'>
                             {/* check if there are links */}
                             {links.length === 0 && (
                                 <div className='my-6 w-full flex justify-center items-center'>

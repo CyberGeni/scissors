@@ -220,16 +220,19 @@ export default function ShortenLinkModal() {
                                                     onBlur={() => setCustomIdentifierTouched(true)}
                                                     className='placeholder:pl-1' type="text" placeholder='launchParty' />
                                             </div>
+                                            {customIdentifierTouched && customIdentifier && (/[^a-zA-Z0-9-]/.test(customIdentifier)) && customIdentifier.length >= 2 && (
+                                                <small className='text-red-500'>Special characters are not allowed. Only letters, numbers and hyphen (-) are allowed.'</small>
+                                            )}
                                             {customIdentifierTouched && customIdentifier && customIdentifier.length <= 2 && (
                                                 <small className='text-red-500'>If you must add a custom URL, it should be more than 2 characters</small>
                                             )}
-                                            {checkIdentifierLoading && customIdentifier.length >= 3 && (
+                                            {checkIdentifierLoading && !(/[^a-zA-Z0-9-]/.test(customIdentifier)) && customIdentifier.length >= 3 && (
                                                 <small className='text-gray-500'>Checking for availability...</small>
                                             )}
-                                            {customIdentifier && customIdentifier.length >= 3 && !checkIdentifierLoading && !customIdentifierAvailability && (
+                                            {customIdentifier && !(/[^a-zA-Z0-9-]/.test(customIdentifier)) && customIdentifier.length >= 3 && !checkIdentifierLoading && !customIdentifierAvailability && (
                                                 <small className='text-red-500'>This link is not available</small>
                                             )}
-                                            {customIdentifier && customIdentifier.length >= 3 && !checkIdentifierLoading && customIdentifierAvailability && (
+                                            {customIdentifier && !(/[^a-zA-Z0-9-]/.test(customIdentifier)) && customIdentifier.length >= 3 && !checkIdentifierLoading && customIdentifierAvailability && (
                                                 <small className='text-green-500'>This link is available</small>
                                             )}
                                             {/* {customIdentifier  && customIdentifier.length >= 3 && !checkIdentifierLoading && customIdentifierAvailability && (

@@ -53,13 +53,7 @@ const Dashboard: React.FC = () => {
           <div className='flex items-center space-x-4 sm:mr-6'>
             {/* <button className='h-fit w-fit whitespace-nowrap sm:w-full rounded-lg px-4 py-3 bg-blue-700 text-white shadow-gray-300/20 shadow-inner' type="submit">Shorten new link</button> */}
             <ShortenLink />
-            {/* <div className='flex items-center w-full space-x-1'>
-              <img className='w-8 h-8' src={userIcon} alt="" />
-              <div className='hidden sm:flex flex-col w-fit -space-y-1'>
-                <span className='text-gray-700'>cybergenie</span>
-                <span className='text-sm text-gray-500'>{user?.email}</span>
-              </div>
-            </div> */}
+        
             <div className="text- text-gray-700">
               <Popover className="relative">
                 {() => (
