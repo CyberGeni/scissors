@@ -9,6 +9,7 @@ export default function ShortenLinkModal() {
     const [linkName, setLinkName] = useState('')
     const [url, setUrl] = useState('')
     const [isLoading, setIsLoading] = useState(false)
+    const [success, setSuccess] = useState(false)
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore next line
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -16,7 +17,7 @@ export default function ShortenLinkModal() {
     const [customIdentifier, setCustomIdentifier] = useState('')
     const [customIdentifierAvailability, setCustomIdentifierAvailability] = useState<boolean | null>(null);
     const [checkIdentifierLoading, setCheckIdentifierLoading] = useState(false)
-    
+
     // form validation states
     const [nameTouched, setNameTouched] = useState(false)
     const [urlTouched, setUrlTouched] = useState(false)
@@ -65,7 +66,6 @@ export default function ShortenLinkModal() {
                 setCustomIdentifierAvailability(null);
             }
         };
-        console.log(customIdentifierAvailability)
         const delay = setTimeout(() => {
             if (isMounted) {
                 checkIdentifierAvailability();
@@ -120,15 +120,13 @@ export default function ShortenLinkModal() {
             console.error('Error inserting link into Supabase:', error);
             // Handle the error case
         } else {
+            setSuccess(true)
             console.log('Link inserted successfully:', data);
             // Handle the success case
         }
         setIsLoading(false)
         // Update the state with the shortened URL
-        closeModal()
-        setLinkName('')
-        setUrl('')
-        setCustomIdentifier('')
+        setUrl(formattedUrl)
         setShortenedUrl(shortenedLink);
     };
 
@@ -141,6 +139,17 @@ export default function ShortenLinkModal() {
         setIsOpen(true)
     }
 
+
+    // copy to clipboard functionality
+    const [copyButtonText, setCopyButtonText] = useState('Copy')
+    const handleCopyToClipboard = () => {
+        navigator.clipboard.writeText(shortenedUrl).then(() => {
+          setCopyButtonText('Copied!');
+          setTimeout(() => {
+            setCopyButtonText('Copy');
+          }, 2500); // Reset the text to 'Copy' after 3 seconds
+        });
+      };
     return (
         <>
             <div className="">
@@ -182,90 +191,117 @@ export default function ShortenLinkModal() {
                                         as="h3"
                                         className="text-xl font-medium leading-6 text-gray-900 pb-4 text-center"
                                     >
-                                        Create a new shortened link
+                                        {success ? (
+                                            <span>🎉 Yayyy... you've shortened a link! 🎉</span>
+                                        ) : (
+                                            <span>Create a new shortened link</span>
+                                        )}
+
                                     </Dialog.Title>
-                                    <form className="mt-2 space-y-4">
-                                        <div className='flex flex-col space-y-1'>
-                                            <label className="text-sm font-medium text-gray-700">
-                                                What's the name of your link?
-                                            </label>
-                                            <input
-                                                onChange={(e) => setLinkName(e.target.value)}
-                                                value={linkName}
-                                                onBlur={() => setNameTouched(true)}
-                                                className='border border-gray-200 rounded-md px-3 py-3' type="text" placeholder="btchr's launch party" />
-                                            {nameTouched && (!linkName || linkName.length < 2) && <small className='text-red-500'>Please add a name for your link</small>}
-                                        </div>
-                                        <div className='flex flex-col space-y-1'>
-                                            <label className="text-sm font-medium text-gray-700">
-                                                Enter your link
-                                            </label>
-                                            <input
-                                                onChange={(e) => setUrl(e.target.value)}
-                                                value={url}
-                                                onBlur={() => setUrlTouched(true)}
-                                                className='border border-gray-200 rounded-md px-3 py-3' type="text" placeholder='example.com' />
-                                            {urlTouched && (!url || url.length < 1) && <small className='text-red-500'>Please enter the link you need to shorten</small>}
-                                            {urlTouched && !isValidUrl && (url.length > 0) && <small className='text-red-500'>Please enter a valid link</small>}
-                                        </div>
-                                        <div className='flex flex-col space-y-1'>
-                                            <label className="text-sm font-medium text-gray-700">
-                                                Customise your link <small className='text-gray-500'>(optional)</small>
-                                            </label>
-                                            <div className='border border-gray-200 rounded-md px-3 py-3 '>
-                                                <span>btchr.vercel.app/</span>
+                                    {!success && (
+                                        <form className="mt-2 space-y-4">
+                                            <div className='flex flex-col space-y-1'>
+                                                <label className="text-sm font-medium text-gray-700">
+                                                    What's the name of your link?
+                                                </label>
                                                 <input
-                                                    onChange={(e) => setCustomIdentifier(e.target.value)}
-                                                    value={customIdentifier}
-                                                    onBlur={() => setCustomIdentifierTouched(true)}
-                                                    className='placeholder:pl-1' type="text" placeholder='launchParty' />
+                                                    onChange={(e) => setLinkName(e.target.value)}
+                                                    value={linkName}
+                                                    onBlur={() => setNameTouched(true)}
+                                                    className='border border-gray-200 rounded-md px-3 py-3' type="text" placeholder="btchr's launch party" />
+                                                {nameTouched && (!linkName || linkName.length < 2) && <small className='text-red-500'>Please add a name for your link</small>}
                                             </div>
-                                            {customIdentifierTouched && customIdentifier && (/[^a-zA-Z0-9-]/.test(customIdentifier)) && customIdentifier.length >= 2 && (
-                                                <small className='text-red-500'>Special characters are not allowed. Only letters, numbers and hyphen (-) are allowed.'</small>
-                                            )}
-                                            {customIdentifierTouched && customIdentifier && customIdentifier.length <= 2 && (
-                                                <small className='text-red-500'>If you must add a custom URL, it should be more than 2 characters</small>
-                                            )}
-                                            {checkIdentifierLoading && !(/[^a-zA-Z0-9-]/.test(customIdentifier)) && customIdentifier.length >= 3 && (
-                                                <small className='text-gray-500'>Checking for availability...</small>
-                                            )}
-                                            {customIdentifier && !(/[^a-zA-Z0-9-]/.test(customIdentifier)) && customIdentifier.length >= 3 && !checkIdentifierLoading && !customIdentifierAvailability && (
-                                                <small className='text-red-500'>This link is not available</small>
-                                            )}
-                                            {customIdentifier && !(/[^a-zA-Z0-9-]/.test(customIdentifier)) && customIdentifier.length >= 3 && !checkIdentifierLoading && customIdentifierAvailability && (
-                                                <small className='text-green-500'>This link is available</small>
-                                            )}
-                                            {/* {customIdentifier  && customIdentifier.length >= 3 && !checkIdentifierLoading && customIdentifierAvailability && (
-                                                <small className='text-red-500'>No special characters apart from hyphen (-) allowed</small>
-                                            )} */}
-                                            {!customIdentifier && !checkIdentifierLoading && (
-                                                <small className='text-gray-500'></small>
-                                            )}
-
+                                            <div className='flex flex-col space-y-1'>
+                                                <label className="text-sm font-medium text-gray-700">
+                                                    Enter your link
+                                                </label>
+                                                <input
+                                                    onChange={(e) => setUrl(e.target.value)}
+                                                    value={url}
+                                                    onBlur={() => setUrlTouched(true)}
+                                                    className='border border-gray-200 rounded-md px-3 py-3' type="text" placeholder='example.com' />
+                                                {urlTouched && (!url || url.length < 1) && <small className='text-red-500'>Please enter the link you need to shorten</small>}
+                                                {urlTouched && !isValidUrl && (url.length > 0) && <small className='text-red-500'>Please enter a valid link</small>}
+                                            </div>
+                                            <div className='flex flex-col space-y-1'>
+                                                <label className="text-sm font-medium text-gray-700">
+                                                    Customise your link <small className='text-gray-500'>(optional)</small>
+                                                </label>
+                                                <div className='border border-gray-200 rounded-md px-3 py-3 '>
+                                                    <span>btchr.vercel.app/</span>
+                                                    <input
+                                                        onChange={(e) => setCustomIdentifier(e.target.value)}
+                                                        value={customIdentifier}
+                                                        onBlur={() => setCustomIdentifierTouched(true)}
+                                                        className='placeholder:pl-1' type="text" placeholder='launchParty' />
+                                                </div>
+                                                {customIdentifierTouched && customIdentifier && (/[^a-zA-Z0-9-]/.test(customIdentifier)) && customIdentifier.length >= 3 && (
+                                                    <small className='text-red-500'>Special characters are not allowed. Only letters, numbers and hyphen (-) are allowed.'</small>
+                                                )}
+                                                {customIdentifierTouched && customIdentifier && customIdentifier.length <= 2 && (
+                                                    <small className='text-red-500'>If you must add a custom URL, it should be more than 2 characters</small>
+                                                )}
+                                                {checkIdentifierLoading && !(/[^a-zA-Z0-9-]/.test(customIdentifier)) && customIdentifier.length >= 3 && (
+                                                    <small className='text-gray-500'>Checking for availability...</small>
+                                                )}
+                                                {customIdentifier && !(/[^a-zA-Z0-9-]/.test(customIdentifier)) && customIdentifier.length >= 3 && !checkIdentifierLoading && !customIdentifierAvailability && (
+                                                    <small className='text-red-500'>This link is not available</small>
+                                                )}
+                                                {customIdentifier && !(/[^a-zA-Z0-9-]/.test(customIdentifier)) && customIdentifier.length >= 3 && !checkIdentifierLoading && customIdentifierAvailability && (
+                                                    <small className='text-green-500'>This link is available</small>
+                                                )}
+                                                {!customIdentifier && !checkIdentifierLoading && (
+                                                    <small className='text-gray-500'></small>
+                                                )}
+                                            </div>
+                                        </form>
+                                    )}
+                                    {success && (
+                                        <div className='text-center mx-auto my-4'>
+                                            <span>Share this link to the world:</span>
+                                            <div className='flex justify-center mt-3 space-x-2'>
+                                                <a className='underline bg-gray-200 p-2 rounded' href={shortenedUrl} target='_blank'>{shortenedUrl}</a>
+                                                <button onClick={handleCopyToClipboard} className='flex items-center w-fit px-3 py-1 border border-gray-200 rounded'>{copyButtonText}
+                                                {copyButtonText === 'Copy' && (
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 ml-1">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75" />
+                                                  </svg>
+                                                  
+                                                )}
+                                                </button>
+                                            </div>
                                         </div>
-                                    </form>
-
+                                    )}
                                     <div className=" flex justify-between mt-4">
-                                        <button
-                                            type="button"
-                                            className="inline-flex justify-center rounded-md border border-gray-200 px-6 py-3 text-sm font-medium text-gray-900 transition-all hover:bg-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                                            onClick={closeModal}
+                                        {!success && (
+                                            <button
+                                                type="button"
+                                                className="inline-flex justify-center rounded-md border border-gray-200 px-6 py-3 text-sm font-medium text-gray-900 transition-all hover:bg-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                                                onClick={closeModal}
+                                            >Cancel</button>
+                                        )}
 
-                                        >
-                                            Cancel
-                                        </button>
-                                        <button
-                                            type="button"
-                                            className="disabled:cursor-not-allowed disabled:hover:bg-blue-100 disabled:opacity-60 disabled:text-blue-700 rounded-md border border-transparent bg-blue-100 px-6 py-3 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                                            onClick={handleSubmit}
-                                            disabled={isLoading || (!url || linkName.length < 2) || !isValidUrl || !customIdentifierAvailability}
-                                        >   {
-                                                isLoading ?
-                                                    <div><span>Creating your link...</span></div>
-                                                    :
-                                                    <span>Create</span>
-                                            }
-                                        </button>
+                                        {success && (
+                                            <button
+                                                type="button"
+                                                className="inline-flex justify-center rounded-md border border-gray-200 px-6 py-3 text-sm font-medium text-gray-900 transition-all hover:bg-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                                                onClick={() => window.location.reload()}
+                                            >Cancel</button>
+                                        )}
+                                        {!success && (
+                                            <button
+                                                type="button"
+                                                className="disabled:cursor-not-allowed disabled:hover:bg-blue-100 disabled:opacity-60 disabled:text-blue-700 rounded-md border border-transparent bg-blue-100 px-6 py-3 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                                                onClick={handleSubmit}
+                                                disabled={isLoading || (!url || linkName.length < 2) || !isValidUrl || !customIdentifierAvailability || (/[^a-zA-Z0-9-]/.test(customIdentifier))}>   {
+                                                    isLoading ?
+                                                        <div><span>Creating your link...</span></div>
+                                                        :
+                                                        <span>Create</span>
+                                                }
+                                            </button>
+                                        )}
+
                                     </div>
                                 </Dialog.Panel>
                             </Transition.Child>
