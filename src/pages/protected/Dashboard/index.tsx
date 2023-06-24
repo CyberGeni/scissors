@@ -41,7 +41,7 @@ const Dashboard: React.FC = () => {
       <Sidebar />
       <section className='sm:ml-[25%] lg:ml-[20%] w-full'>
         {/* topbar */}
-        <div className='border-b border-gray-200 py-4 px-6 flex items-center justify-between w-full'>
+        <div className='bg-white fixed right-0 z-10 border-b border-gray-200 py-4 px-6 flex items-center justify-between w-full sm:w-3/4 lg:w-4/5 '>
           <div>
           <h1 className="sm:hidden text-blue-600 text-3xl font-medium tracking-tighter whitespace-nowrap ">btchr <span className="text-blue-900 text-3xl leading-none -ml-2.5">.</span></h1>
             <h1 className='hidden sm:flex text-gray-800 font-semibold tracking-tight text-lg'>Dashboard</h1>
@@ -58,7 +58,7 @@ const Dashboard: React.FC = () => {
             </div>
           </div>
         </div>
-        <main className=''>
+        <main >
           <Outlet />
         </main>
         {/* main content */}
