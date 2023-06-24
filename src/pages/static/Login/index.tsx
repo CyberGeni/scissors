@@ -135,7 +135,7 @@ function Login() {
                             className={`p-4 rounded-lg bg-gray-800 autofill:bg-gray-900  focus:outline-none w-full placeholder:text-gray-400 ${passwordTouched && (!password || password.length < 6) ? 'border-red-500 border' : 'border-gray-700 border'}`}
                         />
                         <img
-                            className='absolute right-4 top-10 transition-all'
+                            className='hover:cursor-pointer absolute right-4 top-10 transition-all'
                             onClick={() => setShowPassword(!showPassword)}
                             src={showPassword ? eyeSlash : eye}
                             alt=""
