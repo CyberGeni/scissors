@@ -8,7 +8,7 @@ import ShortenLink from '../../../components/Modals/ShortenLinkModal';
 import { Popover, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
 import LogoutModal from '../../../components/Modals/LogoutModal';
-
+import '../../../App.css'
 const Dashboard: React.FC = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState<MyUser | null>(null); // Use the custom User type
@@ -60,12 +60,12 @@ const Dashboard: React.FC = () => {
                 <span className='text-sm text-gray-500'>{user?.email}</span>
               </div>
             </div> */}
-            <div className="">
+            <div className="text- text-gray-700">
               <Popover className="relative">
                 {() => (
                   <>
                     <Popover.Button>
-                      <div className='flex items-center text-left w-full space-x-2'>
+                      <div className='sm:hover:cursor-default focus:outline-none flex items-center text-left w-full space-x-2'>
                         <img className='w-8 h-8' src={userIcon} alt="" />
                         <div className='hidden sm:flex flex-col w-fit -space-y-1'>
                           <span className='text-gray-700'>cybergenie</span>

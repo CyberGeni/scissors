@@ -1,8 +1,18 @@
 .sidebar a.active {
     background-color: #EAECF0;
-    
 }
 .bottom-bar a.active {
     background-color: #EAECF0;
-    
+}
+
+/* custom scrollbar */
+::-webkit-scrollbar {
+    -webkit-appearance: none;
+    background: rgba(108, 115, 125, 0.264);
+    width: 6px;
+    height: 4px;
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    background-color: #999999;
 }

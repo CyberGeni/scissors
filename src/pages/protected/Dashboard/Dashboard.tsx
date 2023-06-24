@@ -71,7 +71,7 @@ const Dashboard: React.FC = () => {
                             </div>
                         </div>
                         {/* list of links */}
-                        <div className='w-full pt-[82px] overflow-y-scroll h-[90vh]'>
+                        <div className='w-full pt-[82px] overflow-y-scroll h-[89vh]'>
                             {/* check if there are links */}
                             {links.length === 0 && (
                                 <div className='my-6 w-full flex justify-center items-center'>
