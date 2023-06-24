@@ -15,7 +15,7 @@ export default function ShortenLinkModal() {
     const [customIdentifier, setCustomIdentifier] = useState('')
     const [customIdentifierAvailability, setCustomIdentifierAvailability] = useState<boolean | null>(null);
     const [checkIdentifierLoading, setCheckIdentifierLoading] = useState(false)
-
+    const [statusMessage, setStatusMessage] = useState('')
     // form validation states
     const [nameTouched, setNameTouched] = useState(false)
     const [urlTouched, setUrlTouched] = useState(false)
@@ -211,23 +211,22 @@ export default function ShortenLinkModal() {
                                                     onBlur={() => setCustomIdentifierTouched(true)}
                                                     className='placeholder:pl-1' type="text" placeholder='launchParty' />
                                             </div>
-                                            {customIdentifierTouched && (!customIdentifier || customIdentifier.length <= 2) && (
-                                                <small className='text-red-500'>
-                                                    If you must add a custom URL, it should be more than 2 characters
-                                                </small>
+                                            {customIdentifierTouched && customIdentifier && customIdentifier.length <= 2 && (
+                                                <small className='text-red-500'>If you must add a custom URL, it should be more than 2 characters</small>
                                             )}
-                                            {customIdentifier && !checkIdentifierLoading && !customIdentifierAvailability && (
+                                            {checkIdentifierLoading && customIdentifier.length >= 3 && (
+                                                <small className='text-gray-500'>Checking for availability...</small>
+                                            )}
+                                            {customIdentifier&& customIdentifier.length >= 3 && !checkIdentifierLoading && !customIdentifierAvailability && (
                                                 <small className='text-red-500'>This link is not available</small>
                                             )}
-                                            {customIdentifier && !checkIdentifierLoading && customIdentifierAvailability && (
+                                            {customIdentifier && customIdentifier.length >= 3 && !checkIdentifierLoading && customIdentifierAvailability && (
                                                 <small className='text-green-500'>This link is available</small>
                                             )}
                                             {!customIdentifier && !checkIdentifierLoading && (
                                                 <small className='text-gray-500'></small>
                                             )}
-                                            {checkIdentifierLoading && (
-                                                <small className='text-gray-500'>Checking for availability...</small>
-                                            )}
+                                            
                                         </div>
                                     </form>
 
