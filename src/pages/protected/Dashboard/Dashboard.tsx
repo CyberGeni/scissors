@@ -71,9 +71,13 @@ const Dashboard: React.FC = () => {
                             </div>
                         </div>
                         {/* list of links */}
-                        <div className='pt-[82px] overflow-y-scroll h-[90vh]'>
+                        <div className='w-full pt-[82px] overflow-y-scroll h-[90vh]'>
                             {/* check if there are links */}
-                            {links.length === 0 && "no links available"}
+                            {links.length === 0 && (
+                                <div className='my-6 w-full flex justify-center items-center'>
+                                    <span className='text-gray-600'>You've not shortened any links yet.</span>
+                                </div>
+                            )}
 
                             {links.map((link) => (
                                 <div className='flex items-center justify-between px-6 py-4 border-y border-gray-200 '>
