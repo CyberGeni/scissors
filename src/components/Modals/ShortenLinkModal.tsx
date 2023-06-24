@@ -7,12 +7,14 @@ export default function ShortenLinkModal() {
     const [user, setUser] = useState<MyUser | null>(null); // Use the custom User type
     const [linkName, setLinkName] = useState('')
     const [url, setUrl] = useState('')
-    
+
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore next line
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [shortenedUrl, setShortenedUrl] = useState('')
     const [customIdentifier, setCustomIdentifier] = useState('')
+    const [customIdentifierAvailability, setCustomIdentifierAvailability] = useState<boolean | null>(null);
+    const [checkIdentifierLoading, setCheckIdentifierLoading] = useState(false)
 
     // form validation states
     const [nameTouched, setNameTouched] = useState(false)
@@ -33,6 +35,42 @@ export default function ShortenLinkModal() {
         };
         fetchUser();
     }, []);
+
+
+    // check identifier availability
+    useEffect(() => {
+        let isMounted = true;
+        const checkIdentifierAvailability = async () => {
+            if (customIdentifier) {
+                setCheckIdentifierLoading(true);
+                const { data, error } = await supabase
+                    .from('links')
+                    .select('identifier')
+                    .eq('identifier', customIdentifier)
+                    .limit(1)
+                    .single();
+
+                if (error) {
+                    console.error('Error checking identifier availability:', error);
+                    setCustomIdentifierAvailability(true); // Reset availability state on error
+                } else {
+                    const isAvailable = data === null; // Check if data is null (no rows returned)
+                    setCustomIdentifierAvailability(isAvailable);
+                }
+                setCheckIdentifierLoading(false);
+            } else {
+                setCustomIdentifierAvailability(null);
+            }
+        };
+        console.log(customIdentifierAvailability)
+        const delay = setTimeout(() => {
+            if (isMounted) {
+                checkIdentifierAvailability();
+            }
+        }, 500);
+
+        return () => clearTimeout(delay);
+    }, [customIdentifier]);
 
     // Generate a unique identifier for the shortened link
     const handleSubmit = async (e: { preventDefault: () => void }) => {
@@ -58,7 +96,7 @@ export default function ShortenLinkModal() {
         const timestamp = new Date().toISOString();
 
         // Construct the shortened URL
-        const shortenedLink = `https://btchr.vercel.app/${ customIdentifier || generatedIdentifier}`;
+        const shortenedLink = `https://btchr.vercel.app/${customIdentifier || generatedIdentifier}`;
 
         // Save the original URL and unique identifier to the database
         const { data, error } = await supabase
@@ -88,11 +126,9 @@ export default function ShortenLinkModal() {
 
 
     const [isOpen, setIsOpen] = useState(true)
-
     function closeModal() {
         setIsOpen(false)
     }
-
     function openModal() {
         setIsOpen(true)
     }
@@ -175,7 +211,23 @@ export default function ShortenLinkModal() {
                                                     onBlur={() => setCustomIdentifierTouched(true)}
                                                     className='placeholder:pl-1' type="text" placeholder='launchParty' />
                                             </div>
-                                            {customIdentifierTouched && (!customIdentifier || customIdentifier.length <= 2) && <small className='text-red-500'>If you must add a custom url, it should be more than 2 characters</small>}
+                                            {customIdentifierTouched && (!customIdentifier || customIdentifier.length <= 2) && (
+                                                <small className='text-red-500'>
+                                                    If you must add a custom URL, it should be more than 2 characters
+                                                </small>
+                                            )}
+                                            {customIdentifier && !checkIdentifierLoading && !customIdentifierAvailability && (
+                                                <small className='text-red-500'>This link is not available</small>
+                                            )}
+                                            {customIdentifier && !checkIdentifierLoading && customIdentifierAvailability && (
+                                                <small className='text-green-500'>This link is available</small>
+                                            )}
+                                            {!customIdentifier && !checkIdentifierLoading && (
+                                                <small className='text-gray-500'></small>
+                                            )}
+                                            {checkIdentifierLoading && (
+                                                <small className='text-gray-500'>Checking for availability...</small>
+                                            )}
                                         </div>
                                     </form>
 
