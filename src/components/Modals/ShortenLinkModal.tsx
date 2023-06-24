@@ -2,6 +2,7 @@ import { User as MyUser } from '../../types/userTypes'; // Import custom User ty
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment, useEffect, useState } from 'react'
 import supabase from '../../supabase'
+import urlRegex from 'url-regex';
 
 export default function ShortenLinkModal() {
     const [user, setUser] = useState<MyUser | null>(null); // Use the custom User type
@@ -15,11 +16,11 @@ export default function ShortenLinkModal() {
     const [customIdentifier, setCustomIdentifier] = useState('')
     const [customIdentifierAvailability, setCustomIdentifierAvailability] = useState<boolean | null>(null);
     const [checkIdentifierLoading, setCheckIdentifierLoading] = useState(false)
- // form validation states
+    // form validation states
     const [nameTouched, setNameTouched] = useState(false)
     const [urlTouched, setUrlTouched] = useState(false)
     const [customIdentifierTouched, setCustomIdentifierTouched] = useState(false)
-
+    
     // fetch user data
     useEffect(() => {
         const fetchUser = async () => {
@@ -35,6 +36,8 @@ export default function ShortenLinkModal() {
         fetchUser();
     }, []);
 
+    // check if link from user input is valid
+    const isValidUrl = urlRegex({exact: true, strict: false}).test(url)
 
     // check identifier availability
     useEffect(() => {
@@ -196,7 +199,8 @@ export default function ShortenLinkModal() {
                                                 value={url}
                                                 onBlur={() => setUrlTouched(true)}
                                                 className='border border-gray-200 rounded-md px-3 py-3' type="text" placeholder='example.com' />
-                                            {urlTouched && (!url || url.length < 2) && <small className='text-red-500'>Please enter the link you need to shorten</small>}
+                                            {urlTouched && (!url || url.length < 1) && <small className='text-red-500'>Please enter the link you need to shorten</small>}
+                                            {urlTouched && !isValidUrl && (url.length > 0) && <small className='text-red-500'>Please enter a valid link</small>}
                                         </div>
                                         <div className='flex flex-col space-y-1'>
                                             <label className="text-sm font-medium text-gray-700">
@@ -216,7 +220,7 @@ export default function ShortenLinkModal() {
                                             {checkIdentifierLoading && customIdentifier.length >= 3 && (
                                                 <small className='text-gray-500'>Checking for availability...</small>
                                             )}
-                                            {customIdentifier&& customIdentifier.length >= 3 && !checkIdentifierLoading && !customIdentifierAvailability && (
+                                            {customIdentifier && customIdentifier.length >= 3 && !checkIdentifierLoading && !customIdentifierAvailability && (
                                                 <small className='text-red-500'>This link is not available</small>
                                             )}
                                             {customIdentifier && customIdentifier.length >= 3 && !checkIdentifierLoading && customIdentifierAvailability && (
@@ -225,7 +229,7 @@ export default function ShortenLinkModal() {
                                             {!customIdentifier && !checkIdentifierLoading && (
                                                 <small className='text-gray-500'></small>
                                             )}
-                                            
+
                                         </div>
                                     </form>
 
