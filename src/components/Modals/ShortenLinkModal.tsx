@@ -8,7 +8,7 @@ export default function ShortenLinkModal() {
     const [user, setUser] = useState<MyUser | null>(null); // Use the custom User type
     const [linkName, setLinkName] = useState('')
     const [url, setUrl] = useState('')
-
+    const [isLoading, setIsLoading] = useState(false)
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore next line
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -16,11 +16,12 @@ export default function ShortenLinkModal() {
     const [customIdentifier, setCustomIdentifier] = useState('')
     const [customIdentifierAvailability, setCustomIdentifierAvailability] = useState<boolean | null>(null);
     const [checkIdentifierLoading, setCheckIdentifierLoading] = useState(false)
+    
     // form validation states
     const [nameTouched, setNameTouched] = useState(false)
     const [urlTouched, setUrlTouched] = useState(false)
     const [customIdentifierTouched, setCustomIdentifierTouched] = useState(false)
-    
+
     // fetch user data
     useEffect(() => {
         const fetchUser = async () => {
@@ -37,7 +38,7 @@ export default function ShortenLinkModal() {
     }, []);
 
     // check if link from user input is valid
-    const isValidUrl = urlRegex({exact: true, strict: false}).test(url)
+    const isValidUrl = urlRegex({ exact: true, strict: false }).test(url)
 
     // check identifier availability
     useEffect(() => {
@@ -77,7 +78,7 @@ export default function ShortenLinkModal() {
     // Generate a unique identifier for the shortened link
     const handleSubmit = async (e: { preventDefault: () => void }) => {
         e.preventDefault();
-
+        setIsLoading(true)
         // Check if the URL has a valid protocol
         const hasProtocol = url.startsWith('http://') || url.startsWith('https://');
         const formattedUrl = hasProtocol ? url : `https://${url}`;
@@ -122,6 +123,7 @@ export default function ShortenLinkModal() {
             console.log('Link inserted successfully:', data);
             // Handle the success case
         }
+        setIsLoading(false)
         // Update the state with the shortened URL
         setShortenedUrl(shortenedLink);
     };
@@ -238,7 +240,7 @@ export default function ShortenLinkModal() {
                                             type="button"
                                             className="inline-flex justify-center rounded-md border border-gray-200 px-6 py-3 text-sm font-medium text-gray-900 transition-all hover:bg-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                                             onClick={closeModal}
-                                            
+
                                         >
                                             Cancel
                                         </button>
@@ -246,9 +248,13 @@ export default function ShortenLinkModal() {
                                             type="button"
                                             className="disabled:cursor-not-allowed disabled:hover:bg-blue-100 disabled:opacity-60 disabled:text-blue-700 rounded-md border border-transparent bg-blue-100 px-6 py-3 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                                             onClick={handleSubmit}
-                                            disabled={(!url || linkName.length < 1) || !isValidUrl}
-                                        >
-                                            Create
+                                            disabled={isLoading || (!url || linkName.length < 1) || !isValidUrl}
+                                        >   {
+                                                isLoading ?
+                                                    <div><span>Creating your link...</span></div>
+                                                    :
+                                                    <span>Create</span>
+                                            }
                                         </button>
                                     </div>
                                 </Dialog.Panel>
