@@ -125,11 +125,15 @@ export default function ShortenLinkModal() {
         }
         setIsLoading(false)
         // Update the state with the shortened URL
+        closeModal()
+        setLinkName('')
+        setUrl('')
+        setCustomIdentifier('')
         setShortenedUrl(shortenedLink);
     };
 
 
-    const [isOpen, setIsOpen] = useState(true)
+    const [isOpen, setIsOpen] = useState(false)
     function closeModal() {
         setIsOpen(false)
     }
@@ -228,6 +232,9 @@ export default function ShortenLinkModal() {
                                             {customIdentifier && customIdentifier.length >= 3 && !checkIdentifierLoading && customIdentifierAvailability && (
                                                 <small className='text-green-500'>This link is available</small>
                                             )}
+                                            {/* {customIdentifier  && customIdentifier.length >= 3 && !checkIdentifierLoading && customIdentifierAvailability && (
+                                                <small className='text-red-500'>No special characters apart from hyphen (-) allowed</small>
+                                            )} */}
                                             {!customIdentifier && !checkIdentifierLoading && (
                                                 <small className='text-gray-500'></small>
                                             )}
@@ -248,7 +255,7 @@ export default function ShortenLinkModal() {
                                             type="button"
                                             className="disabled:cursor-not-allowed disabled:hover:bg-blue-100 disabled:opacity-60 disabled:text-blue-700 rounded-md border border-transparent bg-blue-100 px-6 py-3 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                                             onClick={handleSubmit}
-                                            disabled={isLoading || (!url || linkName.length < 1) || !isValidUrl}
+                                            disabled={isLoading || (!url || linkName.length < 2) || !isValidUrl || !customIdentifierAvailability}
                                         >   {
                                                 isLoading ?
                                                     <div><span>Creating your link...</span></div>

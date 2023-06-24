@@ -1,16 +1,13 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import '../../../App.css'
 import dashboardIcon from '../../../assets/icons/dashboard-icon.png';
 import plansIcon from '../../../assets/icons/plans-icon.png';
 import settingsIcon from '../../../assets/icons/settings-icon.png';
-import logoutIcon from '../../../assets/icons/log-out.png';
-import supabase from "../../../supabase";
+
+import LogoutModal from "../../Modals/LogoutModal";
+
 const Sidebar: React.FC = () => {
-    const navigate = useNavigate();
-    const logout = async () => {
-        supabase.auth.signOut();
-        navigate('/');
-    };
+    
 
     return (
         <>
@@ -18,8 +15,8 @@ const Sidebar: React.FC = () => {
             <div className="hidden sm:block sidebar fixed h-screen sm:w-1/4 lg:w-1/5 border-r border-r-gray-200 px-2 sm:px-5 md:px-8 py-7">
                 <nav className="h-full flex flex-col">
                     <h1 className="text-center text-blue-600 text-3xl font-medium tracking-tighter whitespace-nowrap ">btchr <span className="text-blue-900 text-3xl leading-none -ml-2.5">.</span></h1>
-                    <div className="flex flex-col h-full justify-between content-between my-6">
-                        <div className="flex flex-col h-full space-y-4">
+                    <div className="flex flex-col items-center h-full justify-between content-between my-6">
+                        <div className="flex flex-col w-full h-full space-y-4">
                             <NavLink className="transition-all flex items-center py-3 rounded-md space-x-1.5" to="/dashboard" end>
                                 <div className="side-line w-1 h-full bg-white rounded-xl ml-1.5"></div>
                                 <img className="w-5 h-5" src={dashboardIcon} alt="" />
@@ -36,12 +33,7 @@ const Sidebar: React.FC = () => {
                                 <span className="mt-0.5 text-gray-600 ">Settings</span>
                             </NavLink>
                         </div>
-                        <div className="h-fit mx-auto">
-                            <button onClick={logout} className="px-6 rounded-md py-3 border border-gray-300 space-x-2 flex items-center shadow shadow-[0px_1px_1px_0px_rgba(203,200,212,0.35)">
-                                <span className="text-gray-500">Logout</span>
-                                <img className="w-5 " src={logoutIcon} alt="" />
-                            </button>
-                        </div>
+                        <LogoutModal />
                     </div>
                 </nav>
             </div>
