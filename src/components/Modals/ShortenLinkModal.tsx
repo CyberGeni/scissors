@@ -15,8 +15,7 @@ export default function ShortenLinkModal() {
     const [customIdentifier, setCustomIdentifier] = useState('')
     const [customIdentifierAvailability, setCustomIdentifierAvailability] = useState<boolean | null>(null);
     const [checkIdentifierLoading, setCheckIdentifierLoading] = useState(false)
-    const [statusMessage, setStatusMessage] = useState('')
-    // form validation states
+ // form validation states
     const [nameTouched, setNameTouched] = useState(false)
     const [urlTouched, setUrlTouched] = useState(false)
     const [customIdentifierTouched, setCustomIdentifierTouched] = useState(false)
@@ -39,7 +38,7 @@ export default function ShortenLinkModal() {
 
     // check identifier availability
     useEffect(() => {
-        let isMounted = true;
+        const isMounted = true;
         const checkIdentifierAvailability = async () => {
             if (customIdentifier) {
                 setCheckIdentifierLoading(true);
@@ -70,7 +69,7 @@ export default function ShortenLinkModal() {
         }, 500);
 
         return () => clearTimeout(delay);
-    }, [customIdentifier]);
+    }, [customIdentifier, customIdentifierAvailability]);
 
     // Generate a unique identifier for the shortened link
     const handleSubmit = async (e: { preventDefault: () => void }) => {
