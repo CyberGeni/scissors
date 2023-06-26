@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import supabase from '../../../supabase';
 import Navbar from '../../../components/Navbar';
-
+import '../../../App.css'
 // assets
 import bgGradient from "../../../assets/images/hero-bg-gradient.png"
 import chain from "../../../assets/images/hero-chain.png"
@@ -67,7 +67,7 @@ function Home() {
         <div className='p-4 mx-auto mt-[3%] border border-[#1D2939] min-h-[77vh] flex flex-col justify-center'>
           <img className='absolute w-14 md:w-20 lg:w-40 xl:w-44 2xl:w-48 top-32 left-0' src={chain} alt="" draggable={false} />
           <img className='absolute w-14 md:w-20 lg:w-40 xl:w-44 2xl:w-48 bottom-16 right-40' src={chainBlurred} alt="" draggable={false} />
-          <h1 className='lg:max-w-4xl mx-auto text-5xl md:text-7xl lg:text-[85px] p-4 font-medium from-[#D0D5DD] to-[#D0D5DD]/60 bg-gradient-to-b bg-clip-text text-transparent'>Make that <TextCarousel /> link shorter. Super fast!</h1>
+          <h1 className='hero-text lg:max-w-4xl mx-auto text-5xl md:text-7xl lg:text-[85px] p-4 font-medium'>Make that <TextCarousel /> link shorter. Super fast!</h1>
           <p className='text-gray-400 max-w-lg mx-auto my-8'>Say good bye to long, cumbersome URLs and hello to a simpler, sleeker way to shorten, share and manage your links.</p>
           <div className='max-w-lg mx-auto space-y-3 w-full'>
             <span className='text-gray-300'>Enter your link now to shorten it.</span>

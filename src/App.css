@@ -16,3 +16,12 @@
     border-radius: 8px;
     background-color: #999999;
 }
+
+.hero-text {
+    background: -webkit-linear-gradient(#eee, #333);
+    background: linear-gradient(to bottom, #D0D5DD, rgb(208 213 221 / 0.6));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
