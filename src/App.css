@@ -25,3 +25,7 @@
     -webkit-text-fill-color: transparent;
     color: transparent;
 }
+
+.mobile-nav {
+    backdrop-filter: blur(20px);
+}
