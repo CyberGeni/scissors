@@ -3,7 +3,7 @@ import filterIcon from '../../../assets/icons/filter.png';
 import eye from '../../../assets/icons/eye.png';
 import supabase from '../../../supabase';
 import { useEffect, useState } from 'react';
-
+import { saveAs } from 'file-saver';
 interface Link {
     id: string;
     url: string;
@@ -60,14 +60,18 @@ const Dashboard: React.FC = () => {
 
     }, [user]);
 
-
-
+    // download qr code
+    const downloadQRCode = () => {
+        const qrCodeImageUrl = `http://api.qrserver.com/v1/create-qr-code/?data=${selectedLink?.short_url}&size=100x100`;
+        saveAs(qrCodeImageUrl, 'qr-code.png'); // Download the image file
+      };
+      
     return (
         <>
-            <section className='mt-20'>
+            <section className='bg-gray-200 mt-20'>
                 <div className="relative flex overflow-x-hidden">
                     {/* links section */}
-                    <div className='relative w-full md:w-fit col-span-2'>
+                    <div className='bg-white md:fixed w-full md:w-[40%] lg:w-[35%] xl:w-[25%] col-span-2'>
                         <div className="w-full relative border-r border-gray-200">
                             {/* link header */}
                             <div className="w-auto px-6 py-4 bg-gray-50 flex items-center justify-between">
@@ -78,7 +82,7 @@ const Dashboard: React.FC = () => {
                                 </div>
                             </div>
                             {/* list of links */}
-                            <div className=' mb-20 sm:mb-0 overflow-y-scroll h-[79vh]'>
+                            <div className='overflow-x-hidden mb-20 sm:mb-0 overflow-y-scroll h-[79vh]'>
                                 {/* check if there are links */}
                                 {links.length === 0 && (
                                     <div className='my-6 w-full flex justify-center items-center'>
@@ -109,73 +113,97 @@ const Dashboard: React.FC = () => {
                         </div>
                     </div>
                     {/* details section */}
-                    <div className={`bg-white transition-all absolute md:flex md:static w-full
+                    <div className={`pb-20 sm:pb-0 h-fit md:pl-[53.4%] lg:pl-[43.85%] xl:pl-[31.2%] bg-white transition-all absolute md:flex md:static w-full
                         ${showDetails ? "left-0" : "left-[100vh]"}
                     `}>
                         {selectedLink ? (
-                            <div className=' min-h-screen w-full'>
-                                <div onClick={() => setShowDetails(false)} className='hover:bg-gray-100 transition-all md:hidden m-4 flex items-center p-3 border border-gray-200 w-fit rounded-md'>
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
-                                    </svg>
-                                    <span className='ml-1.5'>Go back</span>
-                                </div>
-                                {/* your link stats */}
-                                <div className='bg-gray-100 w-full py-8 px-6 text-gray-900'>
-                                    <h1 className='text-xl font-medium'>Your link stats</h1>
-                                    <div className='my-6 gap-4 grid grid-cols-1 sm:grid-cols-3 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3'>
-                                        <div className='bg-white rounded-md shadow p-6 space-y-6'>
-                                            <div className='flex justify-between text-gray-500 '>
-                                                <span className='font-medium'>Link clicks</span>
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-                                                </svg>
-
-                                            </div>
-                                            <h1 className='text-3xl font-bold'>2,000</h1>
-                                        </div>
-                                        <div className='bg-white rounded-md shadow p-6 space-y-6'>
-                                            <div className='flex justify-between text-gray-500 '>
-                                                <span className=' font-medium tracking-tight'>Top click source</span>
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-                                                </svg>
-
-                                            </div>
-                                            <h1 className='text-3xl font-bold'>Twitter</h1>
-                                        </div>
-                                        <div className='bg-white rounded-md shadow p-6 space-y-6'>
-                                            <div className='flex justify-between text-gray-500 '>
-                                                <span className='font-medium'>Top location</span>
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-                                                </svg>
-
-                                            </div>
-                                            <h1 className='text-3xl font-bold'>Nigeria</h1>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                {/* your link */}
-                                <div>
-                                    <h1>Your link</h1>
-                                    <div>
-                                        <img src="" alt="" />
-                                        <div>
-                                            <h3>{selectedLink.short_url}</h3>
-                                            <span>{selectedLink.original_url}</span>
-                                            <span>{selectedLink.name}</span>
-                                            <span className='underline my-0.5'>Edit source url</span>
-                                        </div>
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z" />
+                            <div className='w-full'>
+                                <div className='w-full'>
+                                    <div onClick={() => setShowDetails(false)} className='hover:bg-gray-100 transition-all md:hidden m-4 flex items-center p-3 border border-gray-200 w-fit rounded-md'>
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
                                         </svg>
+                                        <span className='ml-1.5'>Go back</span>
+                                    </div>
+                                    {/* your link stats */}
+                                    <div className='bg-gray-100 w-full py-8 px-6 text-gray-900'>
+                                        <h1 className='text-xl font-medium'>Your link stats</h1>
+                                        <div className='my-6 gap-4 grid grid-cols-1 sm:grid-cols-3 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3'>
+                                            <div className='bg-white rounded-md shadow p-6 space-y-6'>
+                                                <div className='flex justify-between text-gray-500 '>
+                                                    <span className='font-medium'>Link clicks</span>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                                                    </svg>
+
+                                                </div>
+                                                <h1 className='text-3xl font-bold'>2,000</h1>
+                                            </div>
+                                            <div className='bg-white rounded-md shadow p-6 space-y-6'>
+                                                <div className='flex justify-between text-gray-500 '>
+                                                    <span className=' font-medium tracking-tight'>Top click source</span>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                                                    </svg>
+
+                                                </div>
+                                                <h1 className='text-3xl font-bold'>Twitter</h1>
+                                            </div>
+                                            <div className='bg-white rounded-md shadow p-6 space-y-6'>
+                                                <div className='flex justify-between text-gray-500 '>
+                                                    <span className='font-medium'>Top location</span>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                                                    </svg>
+
+                                                </div>
+                                                <h1 className='text-3xl font-bold'>Nigeria</h1>
+                                            </div>
+                                        </div>
 
                                     </div>
-                                </div>
-                                
-                            </div>
+                                    {/* your link */}
+                                    <div className='py-8 px-6 bg-gray-50/50 border-y'>
+                                        <h1 className='text-xl font-medium'>Your link</h1>
+                                        <div className='flex flex-col lg:flex-row my-6 gap-4'>
+                                            <img className='object-cover w-full h-[210px] lg:h-auto md:w-[200px] rounded-md' src="https://www.pngkey.com/png/detail/233-2332677_image-500580-placeholder-transparent.png" alt="Image 500580 - Placeholder Transparent@pngkey.com" />
+                                            <div className='flex justify-between w-full'>
+                                                <div className='flex flex-col w-11/12'>
+                                                    <h3 className='text-gray-700'>{selectedLink.short_url}</h3>
+                                                    <span className='text-gray-600'>{selectedLink.original_url}</span>
+                                                    <span className='text-gray-600'>{selectedLink.name}</span>
+                                                    <span className='underline my-2 text-gray-500 underline-offset-4'>Edit source url</span>
+                                                </div>
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-8 h-8">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z" />
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {/* qr code */}
+                                    <div className='py-8 px-6 bg-gray-50 border-y'>
+                                        <h1 className='text-xl font-medium'>QR code</h1>
+                                        <div className='flex flex-col sm:flex-row md:flex-col lg:flex-row my-6 gap-4'>
+                                            <div className='p-2 rounded-md bg-white max-w-xs mx-auto'>
+                                                <img className='object-cover w-[250px] rounded-md bg-white' src={`http://api.qrserver.com/v1/create-qr-code/?data=${selectedLink.short_url}&size=100x100`} alt={selectedLink.name} />
+                                            </div>
+                                            <div className='flex flex-col w-full'>
+                                                <span className='text-gray-600 text-lg max-w-xs'>People can scan this QR code to access your link</span>
+                                                <span className='text-gray-600 text-lg my-2'>Download now to share</span>
+                                                <button onClick={downloadQRCode} className='flex w-fit px-5 py-3 lg:my-4 rounded-md text-gray-500 border border-gray-300 bg-gray-100 shadow-[0px_1px_1px_0px_rgba(203,200,212,0.35),0px_1px_1px_1px_#FFF_inset]'>
+                                                    <span className='mr-2'>Download PNG</span>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                                                    </svg>
+
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div></div>
+
                         ) : (
                             <div>No data to show</div>
                         )}

@@ -90,7 +90,7 @@ const Dashboard: React.FC = () => {
             </div>
           </div>
         </div>
-        <main >
+        <main className='' >
           <Outlet />
         </main>
         {/* main content */}
