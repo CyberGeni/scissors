@@ -71,7 +71,7 @@ const Dashboard: React.FC = () => {
             <section className='bg-gray-200 mt-20'>
                 <div className="relative flex overflow-x-hidden">
                     {/* links section */}
-                    <div className='bg-white md:fixed w-full md:w-[40%] lg:w-[35%] xl:w-[25%] col-span-2'>
+                    <div className='bg-white fixed w-full sm:w-[75%] md:w-[40%] lg:w-[35%] xl:w-[25%] col-span-2'>
                         <div className="w-full relative border-r border-gray-200">
                             {/* link header */}
                             <div className="w-auto px-6 py-4 bg-gray-50 flex items-center justify-between">
