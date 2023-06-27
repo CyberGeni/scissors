@@ -23,14 +23,10 @@ export default function LogoutModal() {
 
     return (
         <>
-            <div className="font-circular ">
-                <div className="h-fit mx-auto">
-                    <button onClick={openModal} className=" px-5 pr-10 sm:pr-6 rounded-md py-3 border border-gray-300 space-x-1 flex items-center shadow shadow-[0px_1px_1px_0px_rgba(203,200,212,0.35)">
-                        <span className="text-gray-500">Logout</span>
-                        <img className="w-5" src={logoutIcon} alt="" />
-                    </button>
-                </div>
-            </div>
+            <button onClick={openModal} className="font-circular px-5 pr-10 mb-2 overflow-y-hidden overflow-hidden sm:pr-6 rounded-md py-3 border border-gray-300 space-x-1 flex items-center shadow shadow-[0px_1px_1px_0px_rgba(203,200,212,0.35)">
+                <span className="text-gray-500">Logout</span>
+                <img className="w-5" src={logoutIcon} alt="" />
+            </button>
 
             <Transition appear show={isOpen} as={Fragment}>
                 <Dialog as="div" className="font-circular relative z-10" onClose={closeModal}>
@@ -65,7 +61,7 @@ export default function LogoutModal() {
                                         Are you sure you want to log out?
                                     </Dialog.Title>
                                     <div className="mt-2">
-                                        
+
                                     </div>
 
                                     <div className="flex justify-between mt-8">

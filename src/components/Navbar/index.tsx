@@ -7,14 +7,14 @@ function Navbar() {
 
     return (
         <>
-            <header className='hidden md:block text-white font-circular'>
+            <header className='hidden md:block text-white font-circular '>
                 <div className='grid grid-cols-3 place-items-center'>
                     <nav className='space-x-4 justify-self-start'>
                         <a href="#features">Features</a>
                         <a href="#pricing">Pricing</a>
                         <a href="#faqs">FAQs</a>
                     </nav>
-                    <span className='flex items-center text-gray-100 font-bold text-4xl tracking-tighter'>scissor sharp<span className='text-blue-700 text-6xl -mt-4'>.</span></span>
+                    <span className='flex items-center text-gray-100 font-bold text-4xl tracking-tighter'>btchr<span className='text-blue-700 text-6xl -mt-4'>.</span></span>
                     <div className='justify-self-end space-x-4'>
                         <Link className='border border-gray-700 rounded-lg w-full p-4 bg-gray-800 text-white' to="/login">Log in</Link>
                         <Link className='transition-all rounded-lg w-full p-4 bg-blue-700 text-white' to="/register">Sign up</Link>
@@ -24,7 +24,7 @@ function Navbar() {
 
             <header className='relative md:hidden'>
                 <div className='flex items-end justify-center'>
-                    <span className='text-center text-gray-100 font-bold text-4xl tracking-tighter'>scissor sharp<span className='text-blue-700 text-6xl -mt-4'>.</span></span>
+                    <span className='text-center text-gray-100 font-bold text-4xl tracking-tighter'>btchr<span className='text-blue-700 text-6xl -mt-4'>.</span></span>
                     <div onClick={() => setShowNav(!showNav)} className='transition-all absolute right-0 bottom-1'>
                         {!showNav ?
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="white" className="w-8 h-8">

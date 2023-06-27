@@ -4,7 +4,7 @@ import eye from '../../../assets/icons/eye.png';
 import supabase from '../../../supabase';
 import { useEffect, useState } from 'react';
 import { saveAs } from 'file-saver';
-import '../../../App.css'
+import '../../../Dashboard.css'
 import EditLinkModal from '../../../components/Modals/EditLinkModal';
 interface Link {
     id: string;
@@ -108,7 +108,7 @@ const Dashboard: React.FC = () => {
                                         `}>
                                         {/* text */}
                                         <div className='tracking-tight flex flex-col w-full'>
-                                            <span className='text-gray-700 text-lg font-medium tracking-tighter mb-0.5'>{link?.short_url}</span>
+                                            <a href={link?.short_url} className='text-gray-700 text-lg font-medium tracking-tighter mb-0.5' target='_blank'>{link?.short_url}</a>
                                             <span className='text-gray-600'>{link?.original_url}</span>
                                             <span className='text-gray-600'>{link?.name}</span>
                                         </div>
@@ -179,7 +179,7 @@ const Dashboard: React.FC = () => {
                                             <img className='object-cover w-full h-[210px] lg:h-auto md:w-[200px] rounded-md' src="https://www.pngkey.com/png/detail/233-2332677_image-500580-placeholder-transparent.png" alt="Image 500580 - Placeholder Transparent@pngkey.com" />
                                             <div className='flex justify-between w-full'>
                                                 <div className='flex flex-col w-11/12'>
-                                                    <h3 className='text-gray-700'>{selectedLink.short_url}</h3>
+                                                    <a href={selectedLink?.short_url} className='text-gray-700 hover:underline transition-all ' target='_blank'>{selectedLink.short_url}</a>
                                                     <span className='text-gray-600'>{selectedLink.original_url}</span>
                                                     <span className='text-gray-600'>{selectedLink.name}</span>
                                                    <EditLinkModal selectedLink={selectedLink} />

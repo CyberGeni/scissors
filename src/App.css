@@ -1,6 +1,4 @@
-* {
-    overflow-x: hidden
-}
+
 .sidebar a.active {
     background-color: #EAECF0;
 }
