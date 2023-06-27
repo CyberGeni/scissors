@@ -6,6 +6,8 @@ import { useEffect, useState } from 'react';
 // import { saveAs } from 'file-saver';
 import '../../../Dashboard.css'
 import EditLinkModal from '../../../components/Modals/EditLinkModal';
+import axios from 'axios';
+
 interface Link {
     id: string;
     url: string;
@@ -65,33 +67,33 @@ const Dashboard: React.FC = () => {
 
     }, [user]);
 
-    // download qr code
     const downloadQRCode = async () => {
         const qrCodeImageUrl = `http://api.qrserver.com/v1/create-qr-code/?data=${selectedLink?.short_url}&size=100x100`;
       
         try {
-          // Fetch the image data as a Blob
-          const response = await fetch(qrCodeImageUrl);
-          const blob = await response.blob();
-      
-          // Create a temporary URL for the Blob object
-          const url = URL.createObjectURL(blob);
+          const response = await axios({
+            url: qrCodeImageUrl,
+            method: 'GET',
+            responseType: 'blob',
+          });
       
           // Create a temporary <a> element
           const link = document.createElement('a');
+      
+          // Create a URL for the Blob object
+          const url = URL.createObjectURL(response.data);
+      
+          // Set the href and download attributes of the <a> element
           link.href = url;
           link.download = 'qr-code.png'; // Specify the filename for the downloaded file
       
           // Programmatically trigger the click event on the <a> element
-          document.body.appendChild(link);
           link.click();
-          document.body.removeChild(link);
       
-          // Revoke the temporary URL to free up memory
+          // Clean up the created URL object
           URL.revokeObjectURL(url);
         } catch (error) {
           console.error('Error downloading QR code:', error);
-          // Handle the error case
         }
       };
       
