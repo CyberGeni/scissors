@@ -68,11 +68,13 @@ const Dashboard: React.FC = () => {
       
     return (
         <>
-            <section className='bg-gray-200 mt-20'>
-                <div className="relative flex overflow-x-hidden">
+            <section className='bg-gray-200 mt-20 w-full'>
+                <div className="relative flex w-full overflow-x-hidden">
                     {/* links section */}
-                    <div className='bg-white fixed w-full sm:w-[75%] md:w-[40%] lg:w-[35%] xl:w-[25%] col-span-2'>
-                        <div className="w-full relative border-r border-gray-200">
+                    <div className={`bg-white w-full sm:w-[75%] md:fixed md:w-[40%] lg:w-[35%] xl:w-[25%] col-span-2
+                        ${showDetails ? "" : "fixed"}
+                    `}>
+                        <div className=" relative border-r border-gray-200">
                             {/* link header */}
                             <div className="w-auto px-6 py-4 bg-gray-50 flex items-center justify-between">
                                 <h3>All links</h3>
@@ -82,7 +84,7 @@ const Dashboard: React.FC = () => {
                                 </div>
                             </div>
                             {/* list of links */}
-                            <div className='overflow-x-hidden mb-20 sm:mb-0 overflow-y-scroll h-[79vh]'>
+                            <div className='overflow-x-hidden pb-20 sm:pb-0 overflow-y-scroll h-[76vh] lg:h-[77vh]'>
                                 {/* check if there are links */}
                                 {links.length === 0 && (
                                     <div className='my-6 w-full flex justify-center items-center'>
@@ -95,6 +97,7 @@ const Dashboard: React.FC = () => {
                                         onClick={() => {
                                             setSelectedLink(link)
                                             setShowDetails(true)
+                                            console.log('details are supposed to show now')
                                         }} className='flex items-center justify-between px-6 py-4 border-y border-gray-200 '>
                                         {/* text */}
                                         <div className='tracking-tight flex flex-col w-full'>
@@ -113,11 +116,11 @@ const Dashboard: React.FC = () => {
                         </div>
                     </div>
                     {/* details section */}
-                    <div className={`pb-20 sm:pb-0 h-fit md:pl-[53.4%] lg:pl-[43.85%] xl:pl-[31.2%] bg-white transition-all absolute md:flex md:static w-full
+                    <div className={` h-fit md:pl-[53.4%] lg:pl-[43.85%] xl:pl-[31.2%] bg-white transition-all absolute md:flex md:static w-full
                         ${showDetails ? "left-0" : "left-[100vh]"}
                     `}>
                         {selectedLink ? (
-                            <div className='w-full'>
+                            <div className='w-full mb-16 md:mb-0'>
                                 <div className='w-full'>
                                     <div onClick={() => setShowDetails(false)} className='hover:bg-gray-100 transition-all md:hidden m-4 flex items-center p-3 border border-gray-200 w-fit rounded-md'>
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
@@ -128,7 +131,7 @@ const Dashboard: React.FC = () => {
                                     {/* your link stats */}
                                     <div className='bg-gray-100 w-full py-8 px-6 text-gray-900'>
                                         <h1 className='text-xl font-medium'>Your link stats</h1>
-                                        <div className='my-6 gap-4 grid grid-cols-1 sm:grid-cols-3 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3'>
+                                        <div className='my-6 gap-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3'>
                                             <div className='bg-white rounded-md shadow p-6 space-y-6'>
                                                 <div className='flex justify-between text-gray-500 '>
                                                     <span className='font-medium'>Link clicks</span>
