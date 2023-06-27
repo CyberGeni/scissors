@@ -4,12 +4,17 @@ import eye from '../../../assets/icons/eye.png';
 import supabase from '../../../supabase';
 import { useEffect, useState } from 'react';
 import { saveAs } from 'file-saver';
+import '../../../App.css'
+import EditLinkModal from '../../../components/Modals/EditLinkModal';
 interface Link {
     id: string;
     url: string;
     original_url: string;
     short_url: string;
     name: string;
+    linkName: string;
+    customIdentifier: string;
+    identifier: string;
     // Add other properties as needed
 }
 
@@ -68,7 +73,7 @@ const Dashboard: React.FC = () => {
       
     return (
         <>
-            <section className='bg-gray-200 mt-20 w-full'>
+            <section className='dashboard bg-gray-200 mt-20 w-full'>
                 <div className="relative flex w-full overflow-x-hidden">
                     {/* links section */}
                     <div className={`bg-white w-full sm:w-[75%] md:fixed md:w-[40%] lg:w-[35%] xl:w-[25%] col-span-2
@@ -98,7 +103,9 @@ const Dashboard: React.FC = () => {
                                             setSelectedLink(link)
                                             setShowDetails(true)
                                             console.log('details are supposed to show now')
-                                        }} className='flex items-center justify-between px-6 py-4 border-y border-gray-200 '>
+                                        }} className={`flex items-center justify-between px-6 py-4 border-b border-gray-200 first-letter:
+                                            ${selectedLink ? " " : ""}
+                                        `}>
                                         {/* text */}
                                         <div className='tracking-tight flex flex-col w-full'>
                                             <span className='text-gray-700 text-lg font-medium tracking-tighter mb-0.5'>{link?.short_url}</span>
@@ -175,7 +182,7 @@ const Dashboard: React.FC = () => {
                                                     <h3 className='text-gray-700'>{selectedLink.short_url}</h3>
                                                     <span className='text-gray-600'>{selectedLink.original_url}</span>
                                                     <span className='text-gray-600'>{selectedLink.name}</span>
-                                                    <span className='underline my-2 text-gray-500 underline-offset-4'>Edit source url</span>
+                                                   <EditLinkModal selectedLink={selectedLink} />
                                                 </div>
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-8 h-8">
                                                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z" />

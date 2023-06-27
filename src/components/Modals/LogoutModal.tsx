@@ -24,15 +24,8 @@ export default function LogoutModal() {
     return (
         <>
             <div className="font-circular ">
-                {/* <button
-          type="button"
-          onClick={openModal}
-          className="rounded-md bg-black bg-opacity-20 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
-        >
-          Open dialog
-        </button> */}
                 <div className="h-fit mx-auto">
-                    <button onClick={openModal} className="px-6 pr-10 sm:pr-6 rounded-md py-3 border border-gray-300 space-x-2 flex items-center shadow shadow-[0px_1px_1px_0px_rgba(203,200,212,0.35)">
+                    <button onClick={openModal} className=" px-5 pr-10 sm:pr-6 rounded-md py-3 border border-gray-300 space-x-1 flex items-center shadow shadow-[0px_1px_1px_0px_rgba(203,200,212,0.35)">
                         <span className="text-gray-500">Logout</span>
                         <img className="w-5" src={logoutIcon} alt="" />
                     </button>
