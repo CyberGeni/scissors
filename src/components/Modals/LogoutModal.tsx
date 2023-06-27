@@ -74,7 +74,7 @@ export default function LogoutModal() {
                                         </button>
                                         <button
                                             type="button"
-                                            className="transition-all inline-flex justify-center rounded-md border border-transparent bg-red-100 px-8 py-3 text-sm font-medium text-red-900 hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                                            className="transition-all inline-flex justify-center rounded-md border border-transparent bg-red-500 hover:bg-red-700 px-8 py-3 text-sm font-medium text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                                             onClick={logout}
                                         >
                                             Yes, log out

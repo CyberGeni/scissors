@@ -343,7 +343,7 @@ export default function ShortenLinkModal() {
                                         {!success && (
                                             <button
                                                 type="button"
-                                                className="disabled:cursor-not-allowed disabled:hover:bg-blue-100 disabled:opacity-60 disabled:text-blue-700 rounded-md border border-transparent bg-blue-100 px-6 py-3 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                                                className="transition-all disabled:hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-60 disabled:text-white rounded-md border border-transparent bg-blue-700 px-6 py-3 text-sm font-medium text-white hover:bg-blue-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                                                 onClick={handleSubmit}
                                                 disabled={isLoading || (!url || linkName.length < 2) || !isValidUrl || !customIdentifierAvailability || (/[^a-zA-Z0-9-]/.test(customIdentifier))}>   {
                                                     isLoading ?

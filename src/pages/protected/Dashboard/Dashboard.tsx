@@ -103,12 +103,12 @@ const Dashboard: React.FC = () => {
                                             setSelectedLink(link)
                                             setShowDetails(true)
                                             console.log('details are supposed to show now')
-                                        }} className={`flex items-center justify-between px-6 py-4 border-b border-gray-200 first-letter:
-                                            ${selectedLink ? " " : ""}
+                                        }} className={`flex transition-all items-center justify-between px-6 py-4 border-b border-gray-200 first-letter:
+                                            ${link.id === selectedLink?.id ? "md:bg-gray-100" : ""}
                                         `}>
                                         {/* text */}
                                         <div className='tracking-tight flex flex-col w-full'>
-                                            <a href={link?.short_url} className='text-gray-700 text-lg font-medium tracking-tighter mb-0.5' target='_blank'>{link?.short_url}</a>
+                                            <span className='text-gray-700 text-lg font-medium tracking-tighter mb-0.5'>{link?.short_url}</span>
                                             <span className='text-gray-600'>{link?.original_url}</span>
                                             <span className='text-gray-600'>{link?.name}</span>
                                         </div>
@@ -194,7 +194,7 @@ const Dashboard: React.FC = () => {
                                     <div className='py-8 px-6 bg-gray-50 border-y'>
                                         <h1 className='text-xl font-medium'>QR code</h1>
                                         <div className='flex flex-col sm:flex-row md:flex-col lg:flex-row my-6 gap-4'>
-                                            <div className='p-2 rounded-md bg-white max-w-xs mx-auto'>
+                                            <div className='p-2 h-fit rounded-md bg-white max-w-xs mx-auto'>
                                                 <img className='object-cover w-[250px] rounded-md bg-white' src={`http://api.qrserver.com/v1/create-qr-code/?data=${selectedLink.short_url}&size=100x100`} alt={selectedLink.name} />
                                             </div>
                                             <div className='flex flex-col w-full'>
