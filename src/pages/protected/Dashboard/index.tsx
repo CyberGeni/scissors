@@ -7,15 +7,13 @@ import userIcon from '../../../assets/icons/user.png';
 import ShortenLink from '../../../components/Modals/ShortenLinkModal';
 import { Popover, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
-
-// import LogoutModal from '../../../components/Modals/LogoutModal';
 import '../../../App.css'
 import LogoutModal from '../../../components/Modals/LogoutModal';
 
 const Dashboard: React.FC = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState<MyUser | null>(null); // Use the custom User type
-
+  const username = user?.email?.split('@')[0];
   // redirect to login if not logged in
   useEffect(() => {
     (async () => {
@@ -56,30 +54,17 @@ const Dashboard: React.FC = () => {
           <div className='flex items-center space-x-4 sm:mr-6'>
             <ShortenLink />
 
-            <div className="relative text-gray-700 popover">
-
-              {/* <div className='sm:hover:cursor-default overflow-x-hidden focus:outline-none flex items-center text-left w-full space-x-2'>
-                <img className='w-8 h-8' src={userIcon} alt="" />
-                <div className='hidden sm:flex flex-col w-fit -space-y-1'>
-                  <span className='text-gray-700'>cybergenie</span>
-                  <span className='text-sm text-gray-500'>{user?.email}</span>
-                </div>
-              </div> */}
-              {/* <div className="overflow-hidden rounded-lg shadow-lg">
-                    <div className="w-fit relative bg-white p-1">
-                      <LogoutModal />
-                    </div>
-                  </div> */}
+            <div className="relative text-gray-700">
               <div className="w-full max-w-sm ">
                 <Popover className="relative">
-                  {({ open }) => (
+                  {() => (
                     <>
                       <Popover.Button
                       >
                         <div className='sm:hover:cursor-default overflow-x-hidden focus:outline-none active:outline-none flex items-center text-left w-full space-x-2'>
                           <img className='w-8 h-8' src={userIcon} alt="" />
                           <div className='hidden sm:flex flex-col w-fit -space-y-1'>
-                            <span className='text-gray-700'>cybergenie</span>
+                            <span className='text-gray-700'>{username}</span>
                             <span className='text-sm text-gray-500'>{user?.email}</span>
                           </div>
                         </div>
@@ -98,7 +83,7 @@ const Dashboard: React.FC = () => {
                             <div className=' sm:hover:cursor-default overflow-x-hidden focus:outline-none active:outline-none flex items-center text-left w-full space-x-2'>
                               <img className='w-8 h-8' src={userIcon} alt="" />
                               <div className='flex flex-col w-fit -space-y-1'>
-                                <span className='text-gray-700'>cybergenie</span>
+                                <span className='text-gray-700'>{username}</span>
                                 <span className='text-sm text-gray-500'>{user?.email}</span>
                               </div>
                             </div>
