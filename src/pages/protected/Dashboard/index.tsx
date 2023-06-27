@@ -5,9 +5,7 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import Sidebar from '../../../components/Dashboard/Sidebar/Sidebar';
 import userIcon from '../../../assets/icons/user.png';
 import ShortenLink from '../../../components/Modals/ShortenLinkModal';
-import { Transition } from '@headlessui/react'
-import { Fragment } from 'react'
-import LogoutModal from '../../../components/Modals/LogoutModal';
+// import LogoutModal from '../../../components/Modals/LogoutModal';
 import '../../../App.css'
 const Dashboard: React.FC = () => {
   const navigate = useNavigate();

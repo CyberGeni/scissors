@@ -21,6 +21,9 @@ type ModalProps = {
 };
 
 export default function EditLinkModal({ selectedLink }: ModalProps) {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore next line
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [user, setUser] = useState<MyUser | null>(null); // Use the custom User type
     const [linkName, setLinkName] = useState('')
     const [url, setUrl] = useState('')
@@ -120,7 +123,7 @@ export default function EditLinkModal({ selectedLink }: ModalProps) {
         //     return result;
         // };
         // const generatedIdentifier = generateUniqueId();
-        const timestamp = new Date().toISOString();
+        // const timestamp = new Date().toISOString();
 
         // Construct the shortened URL
         const shortenedLink = `https://btchr.vercel.app/${customIdentifier}`;
