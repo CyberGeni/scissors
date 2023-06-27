@@ -5,8 +5,13 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import Sidebar from '../../../components/Dashboard/Sidebar/Sidebar';
 import userIcon from '../../../assets/icons/user.png';
 import ShortenLink from '../../../components/Modals/ShortenLinkModal';
+import { Popover, Transition } from '@headlessui/react'
+import { Fragment } from 'react'
+
 // import LogoutModal from '../../../components/Modals/LogoutModal';
 import '../../../App.css'
+import LogoutModal from '../../../components/Modals/LogoutModal';
+
 const Dashboard: React.FC = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState<MyUser | null>(null); // Use the custom User type
@@ -51,20 +56,60 @@ const Dashboard: React.FC = () => {
           <div className='flex items-center space-x-4 sm:mr-6'>
             <ShortenLink />
 
-            <div className=" text-gray-700 popover overflow-auto">
+            <div className="relative text-gray-700 popover">
 
-              <div className='sm:hover:cursor-default focus:outline-none flex items-center text-left w-full space-x-2'>
+              {/* <div className='sm:hover:cursor-default overflow-x-hidden focus:outline-none flex items-center text-left w-full space-x-2'>
                 <img className='w-8 h-8' src={userIcon} alt="" />
                 <div className='hidden sm:flex flex-col w-fit -space-y-1'>
                   <span className='text-gray-700'>cybergenie</span>
                   <span className='text-sm text-gray-500'>{user?.email}</span>
                 </div>
-              </div>
-                  {/* <div className="overflow-hidden rounded-lg shadow-lg">
+              </div> */}
+              {/* <div className="overflow-hidden rounded-lg shadow-lg">
                     <div className="w-fit relative bg-white p-1">
                       <LogoutModal />
                     </div>
                   </div> */}
+              <div className="w-full max-w-sm ">
+                <Popover className="relative">
+                  {({ open }) => (
+                    <>
+                      <Popover.Button
+                      >
+                        <div className='sm:hover:cursor-default overflow-x-hidden focus:outline-none active:outline-none flex items-center text-left w-full space-x-2'>
+                          <img className='w-8 h-8' src={userIcon} alt="" />
+                          <div className='hidden sm:flex flex-col w-fit -space-y-1'>
+                            <span className='text-gray-700'>cybergenie</span>
+                            <span className='text-sm text-gray-500'>{user?.email}</span>
+                          </div>
+                        </div>
+                      </Popover.Button>
+                      <Transition
+                        as={Fragment}
+                        enter="transition ease-out duration-200"
+                        enterFrom="opacity-0 translate-y-1"
+                        enterTo="opacity-100 translate-y-0"
+                        leave="transition ease-in duration-150"
+                        leaveFrom="opacity-100 translate-y-0"
+                        leaveTo="opacity-0 translate-y-1"
+                      >
+                        <Popover.Panel className="sm:hidden absolute -right-52 z-10 mt-3 w-screen max-w-sm -translate-x-1/2 transform px-4 sm:px-0 lg:max-w-3xl">
+                          <div className="p-4 bg-white overflow-hidden rounded-lg shadow-lg ">
+                            <div className=' sm:hover:cursor-default overflow-x-hidden focus:outline-none active:outline-none flex items-center text-left w-full space-x-2'>
+                              <img className='w-8 h-8' src={userIcon} alt="" />
+                              <div className='flex flex-col w-fit -space-y-1'>
+                                <span className='text-gray-700'>cybergenie</span>
+                                <span className='text-sm text-gray-500'>{user?.email}</span>
+                              </div>
+                            </div>
+                            <LogoutModal />
+                          </div>
+                        </Popover.Panel>
+                      </Transition>
+                    </>
+                  )}
+                </Popover>
+              </div>
             </div>
           </div>
         </div>

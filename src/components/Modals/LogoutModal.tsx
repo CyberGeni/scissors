@@ -23,7 +23,7 @@ export default function LogoutModal() {
 
     return (
         <>
-            <button onClick={openModal} className="font-circular px-5 pr-10 mb-2 overflow-y-hidden overflow-hidden sm:pr-6 rounded-md py-3 border border-gray-300 space-x-1 flex items-center shadow shadow-[0px_1px_1px_0px_rgba(203,200,212,0.35)">
+            <button onClick={openModal} className="w-full md:w-fit mt-4 md:mt-0 justify-center font-circular px-5 mb-2 overflow-y-hidden overflow-hidden sm:pr-6 rounded-md py-3 border border-gray-300 space-x-1 flex items-center shadow shadow-[0px_1px_1px_0px_rgba(203,200,212,0.35)">
                 <span className="text-gray-500">Logout</span>
                 <img className="w-5" src={logoutIcon} alt="" />
             </button>
