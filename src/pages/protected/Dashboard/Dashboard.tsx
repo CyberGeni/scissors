@@ -3,7 +3,7 @@ import filterIcon from '../../../assets/icons/filter.png';
 import eye from '../../../assets/icons/eye.png';
 import supabase from '../../../supabase';
 import { useEffect, useState } from 'react';
-import { saveAs } from 'file-saver';
+// import { saveAs } from 'file-saver';
 import '../../../Dashboard.css'
 import EditLinkModal from '../../../components/Modals/EditLinkModal';
 interface Link {
