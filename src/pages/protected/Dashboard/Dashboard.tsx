@@ -6,6 +6,8 @@ import { useEffect, useState } from 'react';
 // import { saveAs } from 'file-saver';
 import '../../../Dashboard.css'
 import EditLinkModal from '../../../components/Modals/EditLinkModal';
+import { Popover, Transition } from '@headlessui/react'
+import { Fragment } from 'react'
 interface Link {
     id: string;
     url: string;
@@ -68,35 +70,34 @@ const Dashboard: React.FC = () => {
     // download qr code
     const downloadQRCode = async () => {
         const qrCodeImageUrl = `http://api.qrserver.com/v1/create-qr-code/?data=${selectedLink?.short_url}&size=100x100.png`;
-      
+
         try {
-          // Fetch the image data as a Blob
-          const response = await fetch(qrCodeImageUrl);
-          const blob = await response.blob();
-      
-          // Create a temporary URL for the Blob object
-          const url = URL.createObjectURL(blob);
-      
-          // Create a temporary <a> element
-          const link = document.createElement('a');
-          link.href = url;
-          link.download = 'qr-code.png'; // Specify the filename for the downloaded file
-      
-          // Programmatically trigger the click event on the <a> element
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-      
-          // Revoke the temporary URL to free up memory
-          URL.revokeObjectURL(url);
+            // Fetch the image data as a Blob
+            const response = await fetch(qrCodeImageUrl);
+            const blob = await response.blob();
+
+            // Create a temporary URL for the Blob object
+            const url = URL.createObjectURL(blob);
+
+            // Create a temporary <a> element
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'qr-code.png'; // Specify the filename for the downloaded file
+
+            // Programmatically trigger the click event on the <a> element
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            // Revoke the temporary URL to free up memory
+            URL.revokeObjectURL(url);
         } catch (error) {
-          console.error('Error downloading QR code:', error);
-          // Handle the error case
+            console.error('Error downloading QR code:', error);
+            // Handle the error case
         }
-      };
-      
-      
-      
+    };
+
+
     return (
         <>
             <section className='dashboard bg-gray-200 mt-20 w-full'>
@@ -149,7 +150,7 @@ const Dashboard: React.FC = () => {
                         </div>
                     </div>
                     {/* details section */}
-                    <div className={` h-fit md:pl-[53.4%] lg:pl-[43.85%] xl:pl-[31.2%] bg-white transition-all absolute md:flex md:static w-full
+                    <div className={`sm:w-[75vw] md:w-full h-fit md:pl-[53.4%] lg:pl-[43.85%] xl:pl-[31.2%] bg-white transition-all absolute md:flex md:static w-full
                         ${showDetails ? "left-0" : "left-[100vh]"}
                     `}>
                         {selectedLink ? (
@@ -171,7 +172,6 @@ const Dashboard: React.FC = () => {
                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                                                         <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
                                                     </svg>
-
                                                 </div>
                                                 <h1 className='text-3xl font-bold'>2,000</h1>
                                             </div>
@@ -208,11 +208,56 @@ const Dashboard: React.FC = () => {
                                                     <a href={selectedLink?.short_url} className='text-gray-700 hover:underline transition-all ' target='_blank'>{selectedLink.short_url}</a>
                                                     <span className='text-gray-600'>{selectedLink.original_url}</span>
                                                     <span className='text-gray-600'>{selectedLink.name}</span>
-                                                   <EditLinkModal selectedLink={selectedLink} />
+                                                    <EditLinkModal selectedLink={selectedLink} />
                                                 </div>
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-8 h-8">
+                                                {/* <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-8 h-8">
                                                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z" />
-                                                </svg>
+                                                </svg> */}
+                                                <div className="max-w-sm">
+                                                    <Popover className="relative">
+                                                        {({ open }) => (
+                                                            <>
+                                                                <Popover.Button>
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-8 h-8">
+                                                                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z" />
+                                                                    </svg>
+                                                                </Popover.Button>
+                                                                <Transition
+                                                                    as={Fragment}
+                                                                    enter="transition ease-out duration-200"
+                                                                    enterFrom="opacity-0 translate-y-1"
+                                                                    enterTo="opacity-100 translate-y-0"
+                                                                    leave="transition ease-in duration-150"
+                                                                    leaveFrom="opacity-100 translate-y-0"
+                                                                    leaveTo="opacity-0 translate-y-1"
+                                                                >
+                                                                    <Popover.Panel className="absolute left-1/2 z-10 mt-3 w-screen max-w-sm -translate-x-1/2 transform px-4 sm:px-0 lg:max-w-3xl">
+                                                                        <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
+                                                                            <div className="relative grid gap-8 bg-white p-7 lg:grid-cols-2">
+                                                                                ho
+                                                                            </div>
+                                                                            <div className="bg-gray-50 p-4">
+                                                                                <a
+                                                                                    href="##"
+                                                                                    className="flow-root rounded-md px-2 py-2 transition duration-150 ease-in-out hover:bg-gray-100 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
+                                                                                >
+                                                                                    <span className="flex items-center">
+                                                                                        <span className="text-sm font-medium text-gray-900">
+                                                                                            Documentation
+                                                                                        </span>
+                                                                                    </span>
+                                                                                    <span className="block text-sm text-gray-500">
+                                                                                        Start integrating products and tools
+                                                                                    </span>
+                                                                                </a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </Popover.Panel>
+                                                                </Transition>
+                                                            </>
+                                                        )}
+                                                    </Popover>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

@@ -41,7 +41,7 @@ const App: React.FC = () => {
             <DashboardLayout />
           </ProtectedRoutes>
         ) : (
-          <Navigate to="/login" replace />
+          null
         )}>
           <Route index element={<Dashboard />} />
           <Route path="/dashboard/plans" element={<Plans />} />
