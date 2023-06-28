@@ -20,6 +20,7 @@ export default function DeleteLinkModal({ selectedLink }: ModalProps) {
     const [deleteText, setDeleteText] = useState('Delete')
     const deleteLink = async () => {
         if (selectedLink) {
+            setDeleteText('Deleting...')
             const { data, error } = await supabase
                 .from('links')
                 .delete()
