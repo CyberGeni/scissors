@@ -64,7 +64,7 @@ export default function EditLinkModal({ selectedLink }: ModalProps) {
             setCustomIdentifier(selectedLink.identifier)
         }
     }, [selectedLink])
-    console.log(selectedLink)
+    // console.log(selectedLink)
     // check if link from user input is valid
     const isValidUrl = urlRegex({ exact: true, strict: false }).test(url)
 
@@ -90,8 +90,6 @@ export default function EditLinkModal({ selectedLink }: ModalProps) {
                 }
                 if (selectedLink?.identifier === customIdentifier) {
                     setCustomIdentifierAvailability(true)
-
-
                 }
                 setCheckIdentifierLoading(false);
             } else {

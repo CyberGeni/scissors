@@ -8,6 +8,8 @@ import '../../../Dashboard.css'
 import EditLinkModal from '../../../components/Modals/EditLinkModal';
 import { Popover, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
+import ShareLinkModal from '../../../components/Modals/ShareLinkModal';
+import DeleteLinkModal from '../../../components/Modals/DeleteLinkModal';
 interface Link {
     id: string;
     url: string;
@@ -215,7 +217,7 @@ const Dashboard: React.FC = () => {
                                                 </svg> */}
                                                 <div className="max-w-sm">
                                                     <Popover className="relative">
-                                                        {({ open }) => (
+                                                        {() => (
                                                             <>
                                                                 <Popover.Button>
                                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-8 h-8">
@@ -231,26 +233,11 @@ const Dashboard: React.FC = () => {
                                                                     leaveFrom="opacity-100 translate-y-0"
                                                                     leaveTo="opacity-0 translate-y-1"
                                                                 >
-                                                                    <Popover.Panel className="absolute left-1/2 z-10 mt-3 w-screen max-w-sm -translate-x-1/2 transform px-4 sm:px-0 lg:max-w-3xl">
-                                                                        <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
-                                                                            <div className="relative grid gap-8 bg-white p-7 lg:grid-cols-2">
-                                                                                ho
-                                                                            </div>
-                                                                            <div className="bg-gray-50 p-4">
-                                                                                <a
-                                                                                    href="##"
-                                                                                    className="flow-root rounded-md px-2 py-2 transition duration-150 ease-in-out hover:bg-gray-100 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
-                                                                                >
-                                                                                    <span className="flex items-center">
-                                                                                        <span className="text-sm font-medium text-gray-900">
-                                                                                            Documentation
-                                                                                        </span>
-                                                                                    </span>
-                                                                                    <span className="block text-sm text-gray-500">
-                                                                                        Start integrating products and tools
-                                                                                    </span>
-                                                                                </a>
-                                                                            </div>
+                                                                    <Popover.Panel className="absolute -right-20 z-10 mt-3 w-screen max-w-[10rem] -translate-x-1/2 transform px-4 sm:px-0">
+                                                                        <div className="p-1 bg-white flex flex-col overflow-hidden rounded-lg shadow-lg">
+                                                                            <ShareLinkModal selectedLink={selectedLink} />
+                                                                            <div className='h-px w-3/4 bg-gray-100 mx-auto'></div>
+                                                                            <DeleteLinkModal selectedLink={selectedLink} />
                                                                         </div>
                                                                     </Popover.Panel>
                                                                 </Transition>
