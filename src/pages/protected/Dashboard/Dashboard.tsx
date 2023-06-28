@@ -67,7 +67,7 @@ const Dashboard: React.FC = () => {
 
     // download qr code
     const downloadQRCode = async () => {
-        const qrCodeImageUrl = `http://api.qrserver.com/v1/create-qr-code/?data=${selectedLink?.short_url}&size=100x100`;
+        const qrCodeImageUrl = `http://api.qrserver.com/v1/create-qr-code/?data=${selectedLink?.short_url}&size=100x100.png`;
       
         try {
           // Fetch the image data as a Blob
