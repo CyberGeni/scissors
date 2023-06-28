@@ -165,7 +165,7 @@ function Login() {
                 </form>
             </div>
 
-            {success && <p>Success! Redirecting to dashboard...</p>}
+            {success && null}
         </div>
     )
 }

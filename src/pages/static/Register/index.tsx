@@ -16,6 +16,8 @@ function Register() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [errorMessage, setErrorMessage] = useState('');
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [success, setSuccess] = useState(false);
     const [emailTouched, setEmailTouched] = useState(false);
     const [passwordTouched, setPasswordTouched] = useState(false);
@@ -158,8 +160,7 @@ function Register() {
                     <p className='text-white'>Already have an account? <Link className='text-blue-500' to="/login">Login</Link></p>
                 </form>
             </div>
-
-            {success && <p>Success! Redirecting to dashboard...</p>}
+            {success && null}
         </div>
     )
 }

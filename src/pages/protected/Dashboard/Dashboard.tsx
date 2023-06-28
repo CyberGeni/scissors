@@ -28,7 +28,6 @@ const Dashboard: React.FC = () => {
     const [selectedLink, setSelectedLink] = useState<Link | null>(null);
     const [showDetails, setShowDetails] = useState(false)
 
-    // console.log("selected link", selectedLink)
     // fetch user data
     useEffect(() => {
         const fetchUser = async () => {
@@ -273,7 +272,7 @@ const Dashboard: React.FC = () => {
                                 </div></div>
 
                         ) : (
-                            <div>No data to show</div>
+                            <div className='text-center text-gray-700 w-full mt-12'>No data to show</div>
                         )}
                     </div>
                 </div>
