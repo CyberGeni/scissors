@@ -19,6 +19,7 @@ interface Link {
     linkName: string;
     customIdentifier: string;
     identifier: string;
+    click_count: number;
     // Add other properties as needed
 }
 
@@ -174,7 +175,7 @@ const Dashboard: React.FC = () => {
                                                         <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
                                                     </svg>
                                                 </div>
-                                                <h1 className='text-3xl font-bold'>2,000</h1>
+                                                <h1 className='text-3xl font-bold'>{selectedLink?.click_count || 0}</h1>
                                             </div>
                                             <div className='bg-white rounded-md shadow p-6 space-y-6'>
                                                 <div className='flex justify-between text-gray-500 '>
