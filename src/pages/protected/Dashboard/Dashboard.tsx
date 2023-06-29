@@ -20,6 +20,7 @@ interface Link {
     customIdentifier: string;
     identifier: string;
     click_count: number;
+    click_location: string[];
     // Add other properties as needed
 }
 
@@ -69,7 +70,26 @@ const Dashboard: React.FC = () => {
 
     }, [user]);
 
-    // download qr code
+    // Count the occurrences of each location
+    const locationCountMap = selectedLink?.click_location?.reduce((countMap: { [location: string]: number; }, location: string | number) => {
+        countMap[location] = (countMap[location] || 0) + 1;
+        return countMap;
+    }, {});
+    console.log(selectedLink?.click_location)
+    // Find the location with the highest count
+    let mostFrequentLocation = null;
+    let maxCount = 0;
+
+    for (const location in locationCountMap) {
+        if (locationCountMap[location] > maxCount) {
+            mostFrequentLocation = location;
+            maxCount = locationCountMap[location];
+        }
+    }
+
+    //   Display the most frequent location on the client side
+    console.log('Most frequent location:', mostFrequentLocation);
+    //     // download qr code
     const downloadQRCode = async () => {
         const qrCodeImageUrl = `http://api.qrserver.com/v1/create-qr-code/?data=${selectedLink?.short_url}&size=100x100.png`;
 
@@ -99,7 +119,7 @@ const Dashboard: React.FC = () => {
         }
     };
 
-
+    console.log(selectedLink?.click_location)
     return (
         <>
             <section className='dashboard bg-gray-200 mt-20 w-full'>
@@ -131,7 +151,6 @@ const Dashboard: React.FC = () => {
                                         onClick={() => {
                                             setSelectedLink(link)
                                             setShowDetails(true)
-                                            console.log('details are supposed to show now')
                                         }} className={`flex transition-all items-center justify-between px-6 py-4 border-b border-gray-200 first-letter:
                                             ${link.id === selectedLink?.id ? "md:bg-gray-100" : ""}
                                         `}>
@@ -143,7 +162,7 @@ const Dashboard: React.FC = () => {
                                         </div>
                                         {/* views */}
                                         <div className='flex flex-col items-center -space-y-0.5'>
-                                            <span className='text-gray-500 font-medium'>123</span>
+                                            <span className='text-gray-500 font-medium'>{link?.click_count || 0}</span>
                                             <img className='w-5' src={eye} alt="" />
                                         </div>
                                     </div>
@@ -195,7 +214,7 @@ const Dashboard: React.FC = () => {
                                                     </svg>
 
                                                 </div>
-                                                <h1 className='text-3xl font-bold'>Nigeria</h1>
+                                                <h1 className='text-3xl font-bold'>{mostFrequentLocation || 'Earth'}</h1>
                                             </div>
                                         </div>
 

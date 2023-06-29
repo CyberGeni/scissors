@@ -130,7 +130,7 @@ export default function EditLinkModal({ selectedLink }: ModalProps) {
 
         // Construct the shortened URL
         const shortenedLink = `https://btchr.vercel.app/${customIdentifier}`;
-        console.log(selectedLink?.linkName)
+        
         if (selectedLink) {
             console.log(selectedLink.linkName)
             // Save the original URL and unique identifier to the database
@@ -167,8 +167,6 @@ export default function EditLinkModal({ selectedLink }: ModalProps) {
     function openModal() {
         setIsOpen(true)
     }
-    console.log(linkName)
-    console.log(selectedLink?.name)
 
     return (
         <>
