@@ -137,6 +137,47 @@ function Home() {
           </div>
         </div>
       </section>
+      <section className='bg-gray-900 px-[5%] py-8'>
+        <h1 className='text-gray-300 text-center text-3xl md:text-4xl lg:text-5xl my-6 font-medium'>What makes us <span className=' from-[#D700EA]/70 from-35% to-[#0A5DEA]/70 to-100% bg-gradient-to-tl bg-clip-text text-transparent'>different</span></h1>
+        <div className='my-8 lg:w-full max-w-screen-xl mx-auto text-gray-300 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 '>
+          <div className='text-right bg-gray-900 border-b border-gray-800 border-r p-7 md:p-10'>
+            <h3 className='text-white font-medium italic text-xl md:text-2xl lg:text-3xl pt-8 pb-3'>01</h3>
+            <p className='w-3/4 sm:w-full lg:w-11/12 ml-auto'>Unlike those clingy exes from the past, our link shortener won't tie you down. Use it for personal projects, professional endeavors, anything — freedom to <span className='text-blue-500'>shorten links without commitment</span> .</p>
+          </div>
+          <div className='text-right bg-gray-900 border-b border-gray-800 border-r p-7 md:p-10'>
+            <h3 className='text-white font-medium italic text-xl md:text-2xl lg:text-3xl pt-8 pb-3'>02</h3>
+            <p className='w-3/4 sm:w-full lg:w-11/12 ml-auto'>Say goodbye to those ridiculously long web addresses that make you question the meaning of life—our link shortener squeezes them down to size, sparing you the headache!</p>
+          </div>
+          <div className='text-right border-b border-gray-800 border-r md:border-r-0 p-7 md:p-10'>
+            <h3 className='text-white font-medium italic text-xl md:text-2xl lg:text-3xl pt-8 pb-3'>03</h3>
+            <p className='w-3/4 sm:w-full lg:w-11/12 ml-auto'> Our links are <span className='text-blue-500'>speed demons</span>. With our turbo-charged technology, you'll be sharing your shortened URLs before you can say "supercalifragilisticexpialidocious" (well, almost)</p>
+          </div>
+          <div className='text-right border-b md:border-b-0 border-gray-800 border-r p-7 md:p-10'>
+            <h3 className='text-white font-medium italic text-xl md:text-2xl lg:text-3xl pt-8 md:pt-0 pb-3'>04</h3>
+            <p className='w-3/4 sm:w-full lg:w-11/12 ml-auto'>Make those shortened links truly your own! Our link shortener lets you <span className='text-blue-500'>unleash your creative genius</span> with personalized slugs, so your URLs can be as unique as your sense of style.</p>
+          </div>
+          <div className='text-right border-b sm:border-b-0 border-gray-800 border-r p-7 md:p-10'>
+            <h3 className='text-white font-medium italic text-xl md:text-2xl lg:text-3xl pt-8 md:pt-0 pb-3'>05</h3>
+            <p className='w-3/4 sm:w-full lg:w-11/12 ml-auto'>Wondering if anyone is actually clicking on your shortened links? We've got you covered! Our <span className='text-blue-500'>analytics feature</span> reveals who's been clicking, where they're from, and maybe even what they had for breakfast (okay, not really).</p>
+          </div>
+          <div className='text-right  border-gray-800 border-r md:border-r-0 p-7 md:p-10'>
+            <h3 className='text-white font-medium italic text-xl md:text-2xl lg:text-3xl pt-8 md:pt-0 pb-3'>06</h3>
+            <p className='w-3/4 sm:w-full lg:w-11/12 ml-auto'>Got a question or need a helping hand? Our <span className='text-blue-500'>friendly support team</span> is here to rescue you, no matter the hour. We're like superheroes, but with fewer capes and more technical expertise.</p>
+          </div>
+        </div>
+      </section>
+
+      <footer className='space-y-6 md:space-y-0 flex-col md:flex-row bg-gray-900 px-[5%] py-9 border-t border-gray-800 border- flex justify-between items-center'>
+        <div className='space-y-6 md:space-y-0 flex flex-col md:flex-row items-center md:space-x-8'>
+          <span className='flex items-center text-gray-100 font-bold text-4xl tracking-tighter'>btchr<span className='text-blue-700 text-6xl -mt-4'>.</span></span>
+          <div className='text-gray-200 space-x-4'>
+            <a href="">Features</a>
+            <a href="">Pricing</a>
+            <a href="">FAQs</a>
+          </div>
+        </div>
+        <div className='text-gray-400 text-center '>&copy; 2023 btchr.</div>
+      </footer>
     </div>
   )
 }

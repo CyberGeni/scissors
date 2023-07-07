@@ -89,6 +89,7 @@ const Dashboard: React.FC = () => {
 
     //   Display the most frequent location on the client side
     console.log('Most frequent location:', mostFrequentLocation);
+    console.log(selectedLink)
     //     // download qr code
     const downloadQRCode = async () => {
         const qrCodeImageUrl = `http://api.qrserver.com/v1/create-qr-code/?data=${selectedLink?.short_url}&size=100x100.png`;

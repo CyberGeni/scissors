@@ -1,32 +1,32 @@
-
 .sidebar a.active {
-    background-color: #EAECF0;
+  background-color: #eaecf0;
 }
 .bottom-bar a.active {
-    background-color: #EAECF0;
+  background-color: #eaecf0;
 }
 
 /* custom scrollbar */
 ::-webkit-scrollbar {
-    -webkit-appearance: none;
-    background: rgba(108, 115, 125, 0.264);
-    width: 6px;
-    height: 4px;
+  -webkit-appearance: none;
+  background: rgba(108, 115, 125, 0.264);
+  width: 6px;
+  height: 4px;
 }
 ::-webkit-scrollbar-thumb {
-    border-radius: 8px;
-    background-color: #999999;
+  border-radius: 8px;
+  background-color: #999999;
 }
 
 .hero-text {
-    background: -webkit-linear-gradient(#eee, #333);
-    background: linear-gradient(to bottom, #D0D5DD, rgb(208 213 221 / 0.6));
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: transparent;
+  background: -webkit-linear-gradient(#eee, #333);
+  background: linear-gradient(to bottom, #d0d5dd, rgb(208 213 221 / 0.6));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
 }
 
 .mobile-nav {
-    backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
 }
+
