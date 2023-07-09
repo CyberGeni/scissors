@@ -8,6 +8,8 @@ import chain from "../../../assets/images/hero-chain.png"
 import chainBlurred from "../../../assets/images/hero-blurred-chain.png"
 import TextCarousel from '../../../components/TextCarousel/TextCarousel';
 import urlRegex from 'url-regex';
+import { NavLink } from 'react-router-dom';
+// import FAQs from '../../../components/Accordion/Faqs';
 function Home() {
 
   const [url, setUrl] = useState('');
@@ -139,7 +141,7 @@ function Home() {
       </section>
 
       {/* what makes us different */}
-      <section className='bg-gray-900 px-[5%] py-8'>
+      <section id='features' className='bg-gray-900 px-[5%] py-8'>
         <h1 className='text-gray-300 text-center text-3xl md:text-4xl lg:text-5xl my-6 font-medium'>What makes us <span className=' from-[#D700EA]/70 from-35% to-[#0A5DEA]/70 to-100% bg-gradient-to-tl bg-clip-text text-transparent'>different</span></h1>
         <div className='my-8 lg:w-full max-w-screen-xl mx-auto text-gray-300 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 '>
           <div className='text-right bg-gray-900 border-b border-gray-800 border-r p-7 md:p-10'>
@@ -170,45 +172,43 @@ function Home() {
       </section>
 
       {/* pricing */}
-      <section className='bg-gray-900 px-[5%] py-8'>
+      <section id='pricing' className='bg-gray-900 px-[5%] py-8'>
         <h1 className='text-gray-300 text-center text-3xl md:text-4xl lg:text-5xl my-6 font-medium'>Affordable <span className=' from-[#D700EA]/70 from-35% to-[#0A5DEA]/70 to-100% bg-gradient-to-tl bg-clip-text text-transparent'>pricing</span></h1>
         <p className='text-gray-400 text-lg text-center w-4/5 max-w-xl mx-auto'>Our link shortener is almost completely free, but we need to keep the lights on so some extra features are restricted to premium users for a tiny fee.</p>
         <div className='flex flex-col space-y-8 md:space-y-0 md:flex-row items-center justify-center my-12'>
           {/* free plan tier card */}
           <div className='border-gray-600 border rounded-xl p-8 md:pr-12'>
             <h4 className='text-white text-center'>Free plan</h4>
-            <h1 className='text-gray-400 text-4xl font-bold text-center'>$0/mth</h1>
+            <h1 className='text-gray-400 text-4xl my-3 font-bold text-center'>$0/mth</h1>
             <p className='text-gray-500 text-center'>Our most popular plan</p>
             <ul className='my-4 space-y-2'>
               <li className='text-gray-300 flex items-center'>
                 <svg className='mr-2' width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M7 0L13.9282 4V12L7 16L0.0717969 12V4L7 0Z" fill="#475467" />
                 </svg>
-
-                Access to all basic features
+                Unlimited shortened links
               </li>
               <li className='text-gray-300 flex items-center'>
                 <svg className='mr-2' width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M7 0L13.9282 4V12L7 16L0.0717969 12V4L7 0Z" fill="#475467" />
                 </svg>
-
-                Access to all basic features
+                100 customised links
               </li>
               <li className='text-gray-300 flex items-center'>
                 <svg className='mr-2' width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M7 0L13.9282 4V12L7 16L0.0717969 12V4L7 0Z" fill="#475467" />
                 </svg>
-
-                Access to all basic features
+                Basic analytics
               </li>
-              <li className='text-gray-300 flex items-center'>
+              {/* <li className='text-gray-300 flex items-center'>
                 <svg className='mr-2' width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M7 0L13.9282 4V12L7 16L0.0717969 12V4L7 0Z" fill="#475467" />
                 </svg>
 
                 Access to all basic features
-              </li>
+              </li> */}
             </ul>
+            
           </div>
 
           {/* pro plan tier card */}
@@ -225,7 +225,7 @@ function Home() {
                 </defs>
               </svg>
             </div>
-            <h1 className='text-gray-400 text-4xl font-bold text-center my-5'>$5/mth</h1>
+            <h1 className='text-white text-4xl font-bold text-center my-5'>$5/mth</h1>
             <p className='text-gray-500 text-center'>Ideal for small teams and startups.</p>
             <ul className='my-4 px-8 space-y-2'>
               <li className='text-gray-300 flex items-center'>
@@ -240,47 +240,36 @@ function Home() {
                   <path d="M7 0L13.9282 4V12L7 16L0.0717969 12V4L7 0Z" fill="#475467" />
                 </svg>
 
-                Access to all basic features
+                Unlimited customised links
+              </li>
+              <li className='text-gray-300 flex items-center'>
+                <svg className='mr-2' width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M7 0L13.9282 4V12L7 16L0.0717969 12V4L7 0Z" fill="#475467" />
+                </svg>
+                Advanced analytics
               </li>
               <li className='text-gray-300 flex items-center'>
                 <svg className='mr-2' width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M7 0L13.9282 4V12L7 16L0.0717969 12V4L7 0Z" fill="#475467" />
                 </svg>
 
-                Access to all basic features
+                24/7 priority email support
               </li>
               <li className='text-gray-300 flex items-center'>
                 <svg className='mr-2' width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M7 0L13.9282 4V12L7 16L0.0717969 12V4L7 0Z" fill="#475467" />
                 </svg>
-
-                Access to all basic features
-              </li>
-              <li className='text-gray-300 flex items-center'>
-                <svg className='mr-2' width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M7 0L13.9282 4V12L7 16L0.0717969 12V4L7 0Z" fill="#475467" />
-                </svg>
-
-                Access to all basic features
-              </li>
-              <li className='text-gray-300 flex items-center'>
-                <svg className='mr-2' width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M7 0L13.9282 4V12L7 16L0.0717969 12V4L7 0Z" fill="#475467" />
-                </svg>
-
-                Access to all basic features
-              </li>
-              <li className='text-gray-300 flex items-center'>
-                <svg className='mr-2' width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M7 0L13.9282 4V12L7 16L0.0717969 12V4L7 0Z" fill="#475467" />
-                </svg>
-
-                Access to all basic features
-              </li>
+                Custom link previews
+              </li>    
             </ul>
+            <NavLink to='/register' className='mx-8 my-6 bg-blue-700 text-white text-center py-2 px-4 rounded-lg block'>Create account</NavLink>
           </div>
         </div>
+      </section>
 
+      {/* faqs */}
+      <section>
+        {/* <FAQs /> */}
       </section>
       <footer className='space-y-6 md:space-y-0 flex-col md:flex-row bg-gray-900 px-[5%] py-9 border-t border-gray-800 border- flex justify-between items-center'>
         <div className='space-y-6 md:space-y-0 flex flex-col md:flex-row items-center md:space-x-8'>

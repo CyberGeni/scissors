@@ -29,13 +29,13 @@ function Navbar() {
                         {!showNav ?
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="white" className="w-8 h-8">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 9h16.5m-16.5 6.75h16.5" />
-                            </svg> : <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="white" className="w-8 h-8">
+                            </svg> : <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="white" className={`w-8 h-8  ${showNav ? "z-[10000] fixed right-6 top-14" : "static"}`}>
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                             </svg>
                         }
                     </div>
                 </div>
-                <div className={`mobile-nav flex items-center justify-center transition-all w-screen h-screen fixed z-10 ${showNav ? "left-0 " : "left-[100vw]"} `}>
+                <div className={`mobile-nav flex items-center justify-center transition-all w-screen h-screen fixed z-10 ${showNav ? "left-0 top-0 pt-28" : "left-[100vw]"} `}>
                     <div className='text-gray-200 text-xl w-full px-8'>
                         <nav className='flex flex-col space-y-8'>
                             <a onClick={() => setShowNav(!showNav)} href="#features">Features</a>
