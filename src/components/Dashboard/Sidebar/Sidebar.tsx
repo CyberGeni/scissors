@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import '../../../App.css'
 import dashboardIcon from '../../../assets/icons/dashboard-icon.png';
 import plansIcon from '../../../assets/icons/plans-icon.png';
@@ -14,7 +14,7 @@ const Sidebar: React.FC = () => {
             {/* desktop sidebar */}
             <div className="hidden sm:block sidebar fixed h-screen sm:w-1/4 lg:w-1/5 border-r border-r-gray-200 px-2 sm:px-5 md:px-8 py-7">
                 <nav className="h-full flex flex-col">
-                    <h1 className="text-center text-blue-600 text-3xl font-medium tracking-tighter whitespace-nowrap overflow-y-hidden">btchr <span className="text-blue-900 text-3xl leading-none -ml-2.5">.</span></h1>
+                    <Link to={"/"} className="text-center text-blue-600 text-3xl font-medium tracking-tighter whitespace-nowrap overflow-y-hidden">btchr <span className="text-blue-900 text-3xl leading-none -ml-2.5">.</span></Link>
                     <div className="flex flex-col items-center h-full justify-between content-between my-6">
                         <div className="flex flex-col w-full h-full space-y-4">
                             <NavLink className="transition-all flex items-center py-3 rounded-md space-x-1.5" to="/dashboard" end>

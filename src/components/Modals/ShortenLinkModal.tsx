@@ -242,13 +242,13 @@ export default function ShortenLinkModal() {
                                                 <label className="text-sm font-medium text-gray-700">
                                                     Customise your link <small className='text-gray-500'>(optional)</small>
                                                 </label>
-                                                <div className='border border-gray-200 rounded-md px-3 py-3 '>
-                                                    <span>btchr.vercel.app/</span>
+                                                <div className='relative flex items-center'>
+                                                    <span className='absolute pl-3'>btchr.vercel.app/</span>
                                                     <input
                                                         onChange={(e) => setCustomIdentifier(e.target.value)}
                                                         value={customIdentifier}
                                                         onBlur={() => setCustomIdentifierTouched(true)}
-                                                        className='placeholder:pl-1' type="text" placeholder='launchParty' />
+                                                        className=' border border-gray-200 rounded-md p-3 pl-[8.45rem] w-full' type="text" placeholder='launchParty' />
                                                 </div>
                                                 {customIdentifierTouched && customIdentifier && (/[^a-zA-Z0-9-]/.test(customIdentifier)) && customIdentifier.length >= 3 && (
                                                     <small className='text-red-500'>Special characters are not allowed. Only letters, numbers and hyphen (-) are allowed.'</small>

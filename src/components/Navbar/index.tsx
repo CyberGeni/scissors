@@ -14,7 +14,7 @@ function Navbar() {
                         <a href="#pricing">Pricing</a>
                         <a href="#faqs">FAQs</a>
                     </nav>
-                    <span className='flex items-center text-gray-100 font-bold text-4xl tracking-tighter'>btchr<span className='text-blue-700 text-6xl -mt-4'>.</span></span>
+                    <Link to={"/"} className='flex items-center text-gray-100 font-bold text-4xl tracking-tighter'>btchr<span className='text-blue-700 text-6xl -mt-4'>.</span></Link>
                     <div className='justify-self-end space-x-4'>
                         <Link className='border border-gray-700 rounded-lg w-full p-4 bg-gray-800 text-white' to="/login">Log in</Link>
                         <Link className='transition-all rounded-lg w-full p-4 bg-blue-700 text-white' to="/register">Sign up</Link>
