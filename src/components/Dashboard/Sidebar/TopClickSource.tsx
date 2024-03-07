@@ -42,7 +42,7 @@ const TopClickSource: React.FC<Props> = ({ clickSource }) => {
     });
 
     // Count occurrences of each app
-    const count = convertedLinks?.reduce((acc, app) => {
+    const count: { [key: string]: number } = convertedLinks?.reduce((acc: {[key: string]: number}, app) => {
         acc[app] = (acc[app] || 0) + 1;
         return acc;
     }, {});
