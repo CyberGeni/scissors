@@ -137,8 +137,8 @@ const Dashboard: React.FC = () => {
                     `}>
                         <div className=" relative border-r border-gray-200">
                             {/* link header */}
-                            <div className="w-auto px-6 py-4 bg-gray-50 flex items-center justify-between">
-                                <h3>All links</h3>
+                            <div className="w-auto px-6 py-4 bg-white flex items-center justify-between">
+                                <h3 className='font-medium text-lg'>All links</h3>
                                 <div className='flex rounded-md border border-gray-100 items-center bg-white space-x-2 px-5 py-3 shadow-[1px_1px_2px_0px_rgba(203,203,209,0.29)]'>
                                     <span className='text-gray-500'>Sort by</span>
                                     <img className='w-5 h-5' src={filterIcon} alt="" />
