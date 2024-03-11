@@ -113,6 +113,7 @@ export default function ShortenLinkModal() {
                     identifier: customIdentifier || generatedIdentifier,
                     created_at: timestamp,
                     user_id: user?.id || null,
+                    is_authenticated: true
                 },
             ])
             .single();
