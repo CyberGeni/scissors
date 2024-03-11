@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef } from "react";
 import { QRCodeCanvas } from 'qrcode.react'
 
 const QRCode = ({ shortUrl }: { shortUrl: string }) => {
