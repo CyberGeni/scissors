@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import supabase from '../../../supabase';
 import { User as MyUser } from '../../../types/userTypes'; // Import custom User type with alias
-import { Outlet, useNavigate } from 'react-router-dom';
+import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import Sidebar from '../../../components/Dashboard/Sidebar/Sidebar';
 import userIcon from '../../../assets/icons/user.png';
 import ShortenLink from '../../../components/Modals/ShortenLinkModal';
@@ -41,6 +41,22 @@ const Dashboard: React.FC = () => {
     fetchUser();
   }, []);
 
+  // display banner if user is offline
+  const [isOnline, setIsOnline] = useState(navigator.onLine);
+
+  useEffect(() => {
+    const handleOnlineStatusChange = () => {
+      setIsOnline(navigator.onLine);
+    };
+
+    window.addEventListener('online', handleOnlineStatusChange);
+    window.addEventListener('offline', handleOnlineStatusChange);
+
+    return () => {
+      window.removeEventListener('online', handleOnlineStatusChange);
+      window.removeEventListener('offline', handleOnlineStatusChange);
+    };
+  }, []);
   return (
     <div className='flex font-circular'>
       <Sidebar />
@@ -103,6 +119,10 @@ const Dashboard: React.FC = () => {
         </main>
         {/* main content */}
 
+        {/* show banner if user is offline */}
+        {!isOnline &&
+          <section className='absolute inset-0 gop-0 z-50 text-center bg-slate-700/50 transition-all'><h1 className='bg-rose-500 text-white py-4'>Your device is offline. <a href={"/dashboard"} className="underline underline-offset-2">Reload</a></h1></section>
+        }
       </section>
     </div>
   );

@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import '../../../Dashboard.css'
 import EditLinkModal from '../../../components/Modals/EditLinkModal';
 import { Popover, Transition } from '@headlessui/react'
+import moment from 'moment';
 import { Fragment } from 'react'
 import ShareLinkModal from '../../../components/Modals/ShareLinkModal';
 import DeleteLinkModal from '../../../components/Modals/DeleteLinkModal';
@@ -25,6 +26,7 @@ interface Link {
     click_count: number;
     click_source: string[];
     click_location: string[];
+    created_at: string;
     // Add other properties as needed
 }
 
@@ -130,14 +132,14 @@ const Dashboard: React.FC = () => {
                                         onClick={() => {
                                             setSelectedLink(link)
                                             setShowDetails(true)
-                                        }} className={`flex transition-all items-center justify-between px-6 py-4 border-b border-gray-200 first-letter:
+                                        }} className={`hover:bg-gray-50 flex transition-all items-center justify-between px-6 py-4 border-b border-gray-200 first-letter:
                                             ${link.id === selectedLink?.id ? "md:bg-gray-100" : ""}
                                         `}>
                                         {/* text */}
-                                        <div className='tracking-tight flex flex-col w-full'>
-                                            <span className='text-gray-700 text-lg font-medium tracking-tighter mb-0.5'>{link?.short_url}</span>
-                                            <span className='text-gray-600'>{link?.original_url}</span>
+                                        <div className='tracking-tight flex flex-col w-full space-y-1'>
+                                            <span className='text-gray-700 text-lg font-medium tracking-tighter'>{link?.short_url.replace(/^https?:\/\//, '')}</span>
                                             <span className='text-gray-600'>{link?.name}</span>
+                                            <span className='text-gray-500'>{moment(link?.created_at).format('LL')} <span className='text-[9px] relative bottom-0.5'>•</span> {moment(link?.created_at).format('LT')}</span>
                                         </div>
                                         {/* views */}
                                         <div className='flex flex-col items-center -space-y-0.5'>

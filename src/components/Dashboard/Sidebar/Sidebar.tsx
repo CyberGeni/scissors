@@ -22,11 +22,11 @@ const Sidebar: React.FC = () => {
                                 <img className="w-5 h-5" src={dashboardIcon} alt="" />
                                 <span className="mt-0.5 text-gray-600 ">Dashboard</span>
                             </NavLink>
-                            <NavLink className="transition-all flex items-center py-3 rounded-md space-x-1.5" to="/dashboard/plans" end>
+                            {/* <NavLink className="transition-all flex items-center py-3 rounded-md space-x-1.5" to="/dashboard/plans" end>
                                 <div className="side-line w-1 h-full bg-white rounded-xl ml-1.5"></div>
                                 <img className="w-5 h-5" src={plansIcon} alt="" />
                                 <span className="mt-0.5 text-gray-600 ">Plans</span>
-                            </NavLink>
+                            </NavLink> */}
                             <NavLink className="transition-all flex items-center py-3 rounded-md space-x-1.5" to="/dashboard/settings" end>
                                 <div className="side-line w-1 h-full bg-white rounded-xl ml-1.5"></div>
                                 <img className="w-5 h-5" src={settingsIcon} alt="" />
@@ -39,16 +39,16 @@ const Sidebar: React.FC = () => {
             </div>
             {/* switches to bottom bar on mobile */}
             <div className="bg-white z-10 bottom-bar flex sm:hidden fixed bottom-0 w-full">
-                <nav className="flex justify-around items-center w-full h-20 border-t ">
-                    <NavLink className="transition-all space-y-1 w-1/4 rounded-2xl h-3/4 flex flex-col items-center justify-center" to="/dashboard" end>
+                <nav className="flex justify-around items-center w-full h-20 border-t px-6">
+                    <NavLink className="transition-all space-y-1 w-full rounded-2xl h-3/4 flex flex-col items-center justify-center" to="/dashboard" end>
                         <img className="w-5 h-5" src={dashboardIcon} alt="" />
                         <span className="text-xs text-gray-500">Dashboard</span>
                     </NavLink>
-                    <NavLink className="transition-all space-y-1 w-1/4 rounded-2xl h-3/4 flex flex-col items-center justify-center" to="/dashboard/plans" end>
+                    {/* <NavLink className="transition-all space-y-1 w-1/4 rounded-2xl h-3/4 flex flex-col items-center justify-center" to="/dashboard/plans" end>
                         <img className="w-5 h-5" src={plansIcon} alt="" />
                         <span className="text-xs text-gray-500">Plans</span>
-                    </NavLink>
-                    <NavLink className="transition-all space-y-1 w-1/4 rounded-2xl h-3/4 flex flex-col items-center justify-center" to="/dashboard/settings" end>
+                    </NavLink> */}
+                    <NavLink className="transition-all space-y-1 w-full rounded-2xl h-3/4 flex flex-col items-center justify-center" to="/dashboard/settings" end>
                         <img className="w-5 h-5" src={settingsIcon} alt="" />
                         <span className="text-xs text-gray-500">Settings</span>
                         
