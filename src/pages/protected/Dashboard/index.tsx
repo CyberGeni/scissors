@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import supabase from '../../../supabase';
 import { User as MyUser } from '../../../types/userTypes'; // Import custom User type with alias
-import { NavLink, Outlet, useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import Sidebar from '../../../components/Dashboard/Sidebar/Sidebar';
 import userIcon from '../../../assets/icons/user.png';
 import ShortenLink from '../../../components/Modals/ShortenLinkModal';

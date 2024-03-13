@@ -1,7 +1,7 @@
 import { Link, NavLink } from "react-router-dom";
 import '../../../App.css'
 import dashboardIcon from '../../../assets/icons/dashboard-icon.png';
-import plansIcon from '../../../assets/icons/plans-icon.png';
+// import plansIcon from '../../../assets/icons/plans-icon.png';
 import settingsIcon from '../../../assets/icons/settings-icon.png';
 
 import LogoutModal from "../../Modals/LogoutModal";
